@@ -1,0 +1,100 @@
+.newsfeed{
+margin-right:15px;
+color:white;
+display:inline;
+
+}
+.h4one{
+
+	color:white;
+	display:inline;
+}
+
+.div1{
+
+	background-color:#404040;
+	padding-top:25px;
+	padding-bottom:30px;
+	padding-left:20px;
+	margin-bottom:20px;
+}
+
+
+.title{
+	display:inline;
+	}
+
+.image{
+	display:inline;
+	float:left;
+	height:200px;
+	width:200px;
+	margin-right:10px;
+}
+
+.maindiv{
+
+	margin-left:15px;
+}
+
+.h4one{
+
+	color: white;
+
+    text-align: center;
+
+}
+.footer{
+
+background-color:#97a1b0;
+padding:15px;
+text-align:center;
+}
+
+.button{
+background-color:#ff6666;
+padding:10px;
+ margin-top:11px;
+border-width:0px;
+color:white;
+}
+
+	    .dropdown{
+           width:210px;
+           height: 30px;
+           margin-top: 10px;
+
+       }
+
+
+       .input{
+           width:140px;
+           height: 27px;
+           float: left;
+       }
+	   .subscribebutton{
+		   width:65px;
+       height: 33px;
+		   background-color:black;
+		   color:white;
+		   border:0px;
+	   }
+
+
+
+
+     #one, #three {
+         width: 15%;
+         height: 100%
+     }
+
+     #two {
+         width: 68%;
+         height: 100%
+     }
+     #outer {
+    display: block;
+    padding: 4px;
+    width: 90%;
+    height: 250px;
+}
