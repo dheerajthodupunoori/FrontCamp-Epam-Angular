@@ -14,16 +14,6 @@ background-color:#404040;
 padding:25px 0px 30px 20px;
 margin-bottom:20px;
 }
-.title{
-display:inline;
-}
-.image{
-display:inline;
-float:left;
-height:200px;
-width:200px;
-margin-right:10px;
-}
 .maindiv{
 margin-left:15px;
 }
@@ -45,7 +35,7 @@ height: 30px;
 margin-top: 10px;
 }
 .input{
-width:140px;
+width:130px;
 height: 27px;
 float: left;
 }
@@ -56,31 +46,20 @@ background-color:black;
 color:white;
 border:0px;
 }
-#one, #three {
-width: 15%;
-height: 100%;
-display: inline-block;
+.flex-container {
+  display: flex;
 }
-#two {
-width: 68%;
-height: 100%;
-display: inline-block;
+.flex-container .logo {
+  width:200px;
+  margin: 10px;
+  text-align: center;
 }
-#outer {
-display: inline-block;
-padding: 4px;
-width: 90%;
-height: 250px;
+.flex-container .content {
+  width: 1000px;
+  margin: 10px;
 }
-.item{
-	height:250px;
-	width:90%;
-}
-.content{
-	display:contents;
-	float:left;
-}
-
-.paragraph{
-width:1300px;
+.flex-container .category {
+  width: 200px;
+  margin: 10px;
+  text-align: center;
 }
