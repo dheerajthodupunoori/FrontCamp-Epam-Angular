@@ -1,5 +1,4 @@
 document.title = "FrontCamp Training Home Task Two";
-
 function CreatePage() {
   // navbar
   var header = document.createElement("div");
@@ -27,6 +26,44 @@ var CreateContent = function() {
   mainDivision.setAttribute("class", "maindiv");
   mainDivision.setAttribute("id", "maindiv");
 
+  var mainContainer = document.createElement("div");
+  mainContainer.setAttribute("class", "flex-container");
+  var logo = document.createElement("div");
+  logo.setAttribute("class", "logo");
+  var logoImage = document.createElement("img");
+  logo.appendChild(logoImage);
+  var content = document.createElement("div");
+  content.setAttribute("class", "content");
+  mainContainer.appendChild(logo);
+  mainContainer.appendChild(content);
+
+  var category = document.createElement("div");
+  category.setAttribute("class", "category");
+  var categories = createCategories();
+  var emailInputField = document.createElement("input");
+  emailInputField.setAttribute("type", "text");
+  emailInputField.setAttribute("name", "fname");
+  emailInputField.setAttribute("class", "input");
+  emailInputField.setAttribute("id", "email");
+  emailInputField.addEventListener("blur", validateEmailId);
+  var subscribe = document.createElement("button");
+  subscribe.setAttribute("value", "Subscribe");
+  subscribe.setAttribute("class", "subscribe-button");
+  subscribe.innerText = "Subscribe";
+  category.appendChild(categories);
+  category.appendChild(emailInputField);
+  category.appendChild(subscribe);
+  mainContainer.appendChild(category);
+  mainDivision.appendChild(mainContainer);
+  var elements = generateItems();
+  elements.forEach(element => {
+    mainDivision.appendChild(element);
+  });
+  document.body.appendChild(mainDivision);
+};
+
+var generateItems = function() {
+  var divisions = [];
   // this loop will create 10 items
   for (var i = 0; i < 10; i++) {
     var mainContainer = document.createElement("div");
@@ -61,27 +98,10 @@ var CreateContent = function() {
     content.appendChild(clickToReadMore);
     mainContainer.appendChild(logo);
     mainContainer.appendChild(content);
-    mainDivision.appendChild(mainContainer);
-    document.body.appendChild(mainDivision);
+    divisions[i] = mainContainer;
+    // mainDivision.appendChild(mainContainer);
   }
-  var category = document.createElement("div");
-  category.setAttribute("class", "category");
-  var categories = createCategories();
-  var emailInputField = document.createElement("input");
-  emailInputField.setAttribute("type", "text");
-  emailInputField.setAttribute("name", "fname");
-  emailInputField.setAttribute("class", "input");
-  emailInputField.setAttribute("id", "email");
-  emailInputField.addEventListener("blur", validateEmailId);
-  var subscribe = document.createElement("button");
-  subscribe.setAttribute("value", "Subscribe");
-  subscribe.setAttribute("class", "subscribe-button");
-  subscribe.innerText = "Subscribe";
-  category.appendChild(categories);
-  category.appendChild(emailInputField);
-  category.appendChild(subscribe);
-  var insert = insertCategorySection();
-  insert.appendChild(category);
+  return divisions;
 };
 
 var createCategories = function() {
@@ -89,6 +109,7 @@ var createCategories = function() {
   selectCategory.setAttribute("class", "dropdown");
   selectCategory.setAttribute("id", "dropdown");
   selectCategory.addEventListener("change", displaySelectedItem);
+  selectCategory.addEventListener("click", resetToDisplay);
   for (var i = 0; i <= 10; i++) {
     if (i == 0) {
       var category = document.createElement("option");
@@ -107,15 +128,22 @@ var createCategories = function() {
   return selectCategory;
 };
 
+var divisions = generateItems();
+
+var resetToDisplay = function() {};
+
 var displaySelectedItem = function() {
   let selectedItem = document.getElementById("dropdown").value;
-  // alert(selectedItem);
-  let mainDivision = document.getElementById("maindiv");
-  let items = document.getElementById("maindiv").childNodes;
-  let i = items;
-  console.log(items);
-  mainDivision.textContent = "";
-  mainDivision.append(i[0]);
+  // console.log(selectedItem);
+  // let mainDivision = document.getElementById("maindiv");
+  // let items = document.getElementById("maindiv").childNodes;
+  // console.log(divisions);
+  for (var i = 0; i < 10; i++) {
+    if (selectedItem != divisions[i].id) {
+      // console.log(divisions[i].id);
+      divisions[i].style.display = "none";
+    }
+  }
 };
 
 var insertCategorySection = function() {
