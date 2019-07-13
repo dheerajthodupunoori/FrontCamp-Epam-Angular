@@ -20,9 +20,10 @@ function CreatePage() {
 
   CreateContent();
 }
+var mainDivision = document.createElement("div");
+
 // this method creates the main content of the body
 var CreateContent = function() {
-  var mainDivision = document.createElement("div");
   mainDivision.setAttribute("class", "maindiv");
   mainDivision.setAttribute("id", "maindiv");
 
@@ -55,10 +56,11 @@ var CreateContent = function() {
   category.appendChild(subscribe);
   mainContainer.appendChild(category);
   mainDivision.appendChild(mainContainer);
-  var elements = generateItems();
-  elements.forEach(element => {
-    mainDivision.appendChild(element);
-  });
+  // var elements = generateItems();
+  // elements.forEach(element => {
+  //   mainDivision.appendChild(element);
+  // });
+  displayAll();
   document.body.appendChild(mainDivision);
 };
 
@@ -128,20 +130,50 @@ var createCategories = function() {
   return selectCategory;
 };
 
-var divisions = generateItems();
+var titles = generateItems();
+// console.log(titles);
 
 var resetToDisplay = function() {};
 
+var displayAll = function() {
+  titles.forEach(element => {
+    mainDivision.appendChild(element);
+  });
+};
+
+var removeAll = function() {
+  // let currentDivisions = document.getElementById("maindiv");
+  let items = document.getElementById("maindiv").childNodes;
+  console.log("previous length" + items.length);
+  // console.log(items[0]);
+  let lastChild = mainDivision.lastElementChild;
+  let firstChild = mainDivision.firstElementChild;
+  while (lastChild && firstChild != lastChild) {}
+  for (var i = 1; i < items.length; i++) {
+    // console.log(items[i].id);
+    mainDivision.removeChild(items[i]);
+  }
+  // let newItems = mainDivision.childNodes;
+  // console.log("new length  " + newItems.length);
+  // newItems.forEach(element => {
+  //   mainDivision.appendChild(element);
+  // });
+};
+
 var displaySelectedItem = function() {
   let selectedItem = document.getElementById("dropdown").value;
-  // console.log(selectedItem);
-  // let mainDivision = document.getElementById("maindiv");
-  // let items = document.getElementById("maindiv").childNodes;
-  // console.log(divisions);
+  let currentDivisions = document.getElementById("maindiv");
+  let items = document.getElementById("maindiv").childNodes;
+  if (selectedItem == "ALL") {
+    removeAll();
+    displayAll();
+  }
   for (var i = 0; i < 10; i++) {
-    if (selectedItem != divisions[i].id) {
-      // console.log(divisions[i].id);
-      divisions[i].style.display = "none";
+    if (selectedItem == titles[i].id) {
+      console.log(selectedItem);
+      removeAll();
+      mainDivision.appendChild(titles[i]);
+      // items[1].replaceWith(titles[i]);
     }
   }
 };
