@@ -1,26 +1,23 @@
 document.title = "FrontCamp Training Home Task Two";
+var mainDivision = document.createElement("div");
+var dataDiv = document.createElement("div");
 function CreatePage() {
   // navbar
   var header = document.createElement("div");
   header.className = "header";
   header.setAttribute("class", "header");
-
   var title = document.createElement("h1");
   title.innerText = "NEWSFEED";
   title.setAttribute("class", "newsfeed");
-
   var another_feedback = document.createElement("h4");
   another_feedback.className = "another-feedback";
   another_feedback.innerText = "Yet another feedback";
-
   header.appendChild(title);
   header.appendChild(another_feedback);
   document.body.appendChild(header);
   // navbar end
-
   CreateContent();
 }
-var mainDivision = document.createElement("div");
 
 // this method creates the main content of the body
 var CreateContent = function() {
@@ -56,14 +53,10 @@ var CreateContent = function() {
   category.appendChild(subscribe);
   mainContainer.appendChild(category);
   mainDivision.appendChild(mainContainer);
-  // var elements = generateItems();
-  // elements.forEach(element => {
-  //   mainDivision.appendChild(element);
-  // });
-  displayAll();
+  dataDiv.setAttribute("id", "data-div");
+  displayAll(dataDiv);
   document.body.appendChild(mainDivision);
 };
-
 var generateItems = function() {
   var divisions = [];
   // this loop will create 10 items
@@ -105,59 +98,55 @@ var generateItems = function() {
   }
   return divisions;
 };
+var titles = generateItems();
 
 var createCategories = function() {
   var selectCategory = document.createElement("select");
   selectCategory.setAttribute("class", "dropdown");
   selectCategory.setAttribute("id", "dropdown");
   selectCategory.addEventListener("change", displaySelectedItem);
-  selectCategory.addEventListener("click", resetToDisplay);
   for (var i = 0; i <= 10; i++) {
     if (i == 0) {
       var category = document.createElement("option");
       category.setAttribute("value", "ALL");
       category.innerText = "ALL";
-
       selectCategory.appendChild(category);
     } else {
       var category = document.createElement("option");
       category.setAttribute("value", i);
       category.innerText = i;
-
       selectCategory.appendChild(category);
     }
   }
   return selectCategory;
 };
 
-var titles = generateItems();
-// console.log(titles);
-
-var resetToDisplay = function() {};
-
-var displayAll = function() {
+var displayAll = function(dataDiv) {
   titles.forEach(element => {
-    mainDivision.appendChild(element);
+    dataDiv.appendChild(element);
   });
+  mainDivision.appendChild(dataDiv);
 };
 
 var removeAll = function() {
-  // let currentDivisions = document.getElementById("maindiv");
-  let items = document.getElementById("maindiv").childNodes;
+  let currentDataDiv = document.getElementById("data-div");
+  let items = currentDataDiv.childNodes;
   console.log("previous length" + items.length);
-  // console.log(items[0]);
-  let lastChild = mainDivision.lastElementChild;
-  let firstChild = mainDivision.firstElementChild;
-  while (lastChild && firstChild != lastChild) {}
-  for (var i = 1; i < items.length; i++) {
-    // console.log(items[i].id);
-    mainDivision.removeChild(items[i]);
+  // let lastChild = mainDivision.lastElementChild;
+  // let firstChild = mainDivision.firstElementChild;
+  console.log("length of data div :" + items.length);
+  var child = currentDataDiv.lastElementChild;
+  while (child) {
+    currentDataDiv.removeChild(child);
+    child = currentDataDiv.lastElementChild;
   }
-  // let newItems = mainDivision.childNodes;
-  // console.log("new length  " + newItems.length);
-  // newItems.forEach(element => {
-  //   mainDivision.appendChild(element);
-  // });
+  while (currentDataDiv.hasChildNodes()) {
+    currentDataDiv.removeChild();
+  }
+  // for (var i = 0; i < items.length; i++) {
+  //   console.log("div to be removed :" + items[i].id);
+  //   currentDataDiv.removeChild(items[i]);
+  // }
 };
 
 var displaySelectedItem = function() {
@@ -166,14 +155,13 @@ var displaySelectedItem = function() {
   let items = document.getElementById("maindiv").childNodes;
   if (selectedItem == "ALL") {
     removeAll();
-    displayAll();
+    displayAll(dataDiv);
   }
   for (var i = 0; i < 10; i++) {
     if (selectedItem == titles[i].id) {
-      console.log(selectedItem);
+      console.log("selected category" + selectedItem);
       removeAll();
-      mainDivision.appendChild(titles[i]);
-      // items[1].replaceWith(titles[i]);
+      dataDiv.appendChild(titles[i]);
     }
   }
 };
