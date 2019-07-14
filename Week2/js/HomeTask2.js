@@ -1,15 +1,15 @@
-document.title = "FrontCamp Training Home Task Two";
+document.title = "FrontCamp Training Task Two";
 var mainDivision = document.createElement("div");
 var dataDiv = document.createElement("div");
 function CreatePage() {
   // navbar
-  var header = document.createElement("div");
+  let header = document.createElement("div");
   header.className = "header";
   header.setAttribute("class", "header");
-  var title = document.createElement("h1");
+  let title = document.createElement("h1");
   title.innerText = "NEWSFEED";
   title.setAttribute("class", "newsfeed");
-  var another_feedback = document.createElement("h4");
+  let another_feedback = document.createElement("h4");
   another_feedback.className = "another-feedback";
   another_feedback.innerText = "Yet another feedback";
   header.appendChild(title);
@@ -24,13 +24,11 @@ var CreateContent = function() {
   mainDivision.setAttribute("class", "maindiv");
   mainDivision.setAttribute("id", "maindiv");
 
-  var mainContainer = document.createElement("div");
+  let mainContainer = document.createElement("div");
   mainContainer.setAttribute("class", "flex-container");
-  var logo = document.createElement("div");
+  let logo = document.createElement("div");
   logo.setAttribute("class", "logo");
-  var logoImage = document.createElement("img");
-  logo.appendChild(logoImage);
-  var content = document.createElement("div");
+  let content = document.createElement("div");
   content.setAttribute("class", "content");
   mainContainer.appendChild(logo);
   mainContainer.appendChild(content);
@@ -58,22 +56,34 @@ var CreateContent = function() {
   document.body.appendChild(mainDivision);
 };
 var generateItems = function() {
-  var divisions = [];
+  let divisions = [];
+  const titleNames = [
+    "One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten"
+  ];
   // this loop will create 10 items
   for (var i = 0; i < 10; i++) {
-    var mainContainer = document.createElement("div");
+    let mainContainer = document.createElement("div");
     mainContainer.setAttribute("class", "flex-container");
     mainContainer.setAttribute("id", i + 1);
-    var logo = document.createElement("div");
+    let logo = document.createElement("div");
     logo.setAttribute("class", "logo");
-    var logoImage = document.createElement("img");
+    let logoImage = document.createElement("img");
     logoImage.setAttribute("src", "./Assets/image1.png");
     logo.appendChild(logoImage);
-    var content = document.createElement("div");
+    let content = document.createElement("div");
     content.setAttribute("class", "content");
-    var title = document.createElement("h3");
-    title.innerText = "Title One";
-    var description = document.createElement("p");
+    let title = document.createElement("h3");
+    title.innerText = "Title " + titleNames[i];
+    let description = document.createElement("p");
     description.innerText =
       "We have helped over 120 Fortune 1000 companies in the following" +
       "industries solve their most complex technology challenges. Now see " +
@@ -82,7 +92,7 @@ var generateItems = function() {
       "challenges. Now see what we can do for you. We have helped over 120" +
       "Fortune 1000 companies in the following industries solve their most" +
       "complex technology challenges. Now see what we can do for you";
-    var clickToReadMore = document.createElement("button");
+    let clickToReadMore = document.createElement("button");
     clickToReadMore.setAttribute("value", "Continue Reading");
     clickToReadMore.setAttribute("class", "continue-reading");
     clickToReadMore.setAttribute("id", i + 1);
@@ -94,14 +104,13 @@ var generateItems = function() {
     mainContainer.appendChild(logo);
     mainContainer.appendChild(content);
     divisions[i] = mainContainer;
-    // mainDivision.appendChild(mainContainer);
   }
   return divisions;
 };
-var titles = generateItems();
+var channels = generateItems();
 
 var createCategories = function() {
-  var selectCategory = document.createElement("select");
+  let selectCategory = document.createElement("select");
   selectCategory.setAttribute("class", "dropdown");
   selectCategory.setAttribute("id", "dropdown");
   selectCategory.addEventListener("change", displaySelectedItem);
@@ -122,7 +131,7 @@ var createCategories = function() {
 };
 
 var displayAll = function(dataDiv) {
-  titles.forEach(element => {
+  channels.forEach(element => {
     dataDiv.appendChild(element);
   });
   mainDivision.appendChild(dataDiv);
@@ -131,10 +140,6 @@ var displayAll = function(dataDiv) {
 var removeAll = function() {
   let currentDataDiv = document.getElementById("data-div");
   let items = currentDataDiv.childNodes;
-  console.log("previous length" + items.length);
-  // let lastChild = mainDivision.lastElementChild;
-  // let firstChild = mainDivision.firstElementChild;
-  console.log("length of data div :" + items.length);
   var child = currentDataDiv.lastElementChild;
   while (child) {
     currentDataDiv.removeChild(child);
@@ -143,43 +148,33 @@ var removeAll = function() {
   while (currentDataDiv.hasChildNodes()) {
     currentDataDiv.removeChild();
   }
-  // for (var i = 0; i < items.length; i++) {
-  //   console.log("div to be removed :" + items[i].id);
-  //   currentDataDiv.removeChild(items[i]);
-  // }
 };
 
 var displaySelectedItem = function() {
   let selectedItem = document.getElementById("dropdown").value;
-  let currentDivisions = document.getElementById("maindiv");
-  let items = document.getElementById("maindiv").childNodes;
   if (selectedItem == "ALL") {
     removeAll();
     displayAll(dataDiv);
   }
   for (var i = 0; i < 10; i++) {
-    if (selectedItem == titles[i].id) {
-      console.log("selected category" + selectedItem);
+    if (selectedItem == channels[i].id) {
       removeAll();
-      dataDiv.appendChild(titles[i]);
+      dataDiv.appendChild(channels[i]);
     }
   }
 };
-
-var insertCategorySection = function() {
-  let items = document.getElementById("maindiv").childNodes;
-  return items[0];
-};
-
 // to show popup when continue reading button is clicked
 function showPoPUp() {
   alert("Hello");
 }
 
+//This function is to validate an email Id entered by the user.
 var validateEmailId = function() {
   let emailId = document.getElementById("email").value;
+  //regular expression to validate email id.
   let emailRegex = /^[a-z0-9._]+@[a-z0-9]+.[a-z]{2,3}/;
   if (emailRegex.test(emailId)) {
+    //if email id is valid then saving it to local storag.
     localStorage.setItem("EmailId", emailId);
   } else {
     alert("Invalid EmailId");
