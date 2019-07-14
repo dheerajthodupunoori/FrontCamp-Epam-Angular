@@ -58,16 +58,28 @@ var CreateContent = function() {
 var generateItems = function() {
   let divisions = [];
   const titleNames = [
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten"
+    "Canada",
+    "Mexico",
+    "Us",
+    "Austria",
+    "Bulgaria",
+    "Republic",
+    "Germany",
+    "Hungary",
+    "Ireland",
+    "Netherlands"
+  ];
+  let logoPaths = [
+    "./Assets/canada.png",
+    "./Assets/mexico.png",
+    "./Assets/us.png",
+    "./Assets/austria.png",
+    "./Assets/bulgaria.png",
+    "./Assets/republic.png",
+    "./Assets/germany.png",
+    "./Assets/hungary.png",
+    "./Assets/ireland.png",
+    "./Assets/netherlands.png"
   ];
   // this loop will create 10 items
   for (var i = 0; i < 10; i++) {
@@ -77,12 +89,13 @@ var generateItems = function() {
     let logo = document.createElement("div");
     logo.setAttribute("class", "logo");
     let logoImage = document.createElement("img");
-    logoImage.setAttribute("src", "./Assets/image1.png");
+    logoImage.setAttribute("src", logoPaths[i]);
+    logoImage.setAttribute("class", "logo-image");
     logo.appendChild(logoImage);
     let content = document.createElement("div");
     content.setAttribute("class", "content");
     let title = document.createElement("h3");
-    title.innerText = "Title " + titleNames[i];
+    title.innerText = titleNames[i];
     let description = document.createElement("p");
     description.innerText =
       "We have helped over 120 Fortune 1000 companies in the following" +
@@ -111,21 +124,30 @@ var channels = generateItems();
 
 var createCategories = function() {
   let selectCategory = document.createElement("select");
+  let channelNames = [
+    "Canada",
+    "Mexico",
+    "UnitedStates",
+    "Austria",
+    "Bulgaria",
+    "Czech Republic",
+    "Germany",
+    "Hungary",
+    "Ireland",
+    "Netherlands"
+  ];
   selectCategory.setAttribute("class", "dropdown");
   selectCategory.setAttribute("id", "dropdown");
   selectCategory.addEventListener("change", displaySelectedItem);
-  for (var i = 0; i <= 10; i++) {
-    if (i == 0) {
-      var category = document.createElement("option");
-      category.setAttribute("value", "ALL");
-      category.innerText = "ALL";
-      selectCategory.appendChild(category);
-    } else {
-      var category = document.createElement("option");
-      category.setAttribute("value", i);
-      category.innerText = i;
-      selectCategory.appendChild(category);
-    }
+  var category = document.createElement("option");
+  category.setAttribute("value", "ALL");
+  category.innerText = "ALL";
+  selectCategory.appendChild(category);
+  for (var i = 0; i < 10; i++) {
+    var category = document.createElement("option");
+    category.setAttribute("value", i + 1);
+    category.innerText = channelNames[i];
+    selectCategory.appendChild(category);
   }
   return selectCategory;
 };
