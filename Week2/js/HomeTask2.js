@@ -62,7 +62,7 @@ var channelsData = [
     name: "Hungary",
     logopath: "./Assets/hungary.png",
     address: `FRANKFURT AM MAIN
-    Franklinstrasse 56, 
+    Franklinstrasse 56,
     60486 Frankfurt am Main,
     Germany`
   },
@@ -183,36 +183,34 @@ var createCategories = function() {
   selectCategory.setAttribute("class", "dropdown");
   selectCategory.setAttribute("id", "dropdown");
   selectCategory.addEventListener("change", displaySelectedItem);
+  let selectFragment = document.createDocumentFragment();
   let allCategory = document.createElement("option");
   allCategory.setAttribute("value", "ALL");
   allCategory.innerText = "ALL";
-  selectCategory.appendChild(allCategory);
+  selectFragment.appendChild(allCategory);
   for (let i = 0; i < 10; i++) {
     let category = document.createElement("option");
     category.setAttribute("value", i + 1);
     category.innerText = channelsData[i].name;
-    selectCategory.appendChild(category);
+    selectFragment.appendChild(category);
   }
+  selectCategory.appendChild(selectFragment);
   return selectCategory;
 };
 
 var displayAll = function(dataDiv) {
-  channels.forEach(element => {
-    dataDiv.appendChild(element);
-  });
+  for (let i = 0; i < channels.length; i++) {
+    channels[i].style.display = "flex";
+    dataDiv.appendChild(channels[i]);
+  }
   mainDivision.appendChild(dataDiv);
 };
 
 var removeAll = function() {
   let currentDataDiv = document.getElementById("data-div");
-  let items = currentDataDiv.childNodes;
-  var child = currentDataDiv.lastElementChild;
-  while (child) {
-    currentDataDiv.removeChild(child);
-    child = currentDataDiv.lastElementChild;
-  }
-  while (currentDataDiv.hasChildNodes()) {
-    currentDataDiv.removeChild();
+  let children = currentDataDiv.childNodes;
+  for (let i = 0; i < children.length; i++) {
+    children[i].style.display = "none";
   }
 };
 
@@ -225,6 +223,7 @@ var displaySelectedItem = function() {
   for (let i = 0; i < 10; i++) {
     if (selectedItem == channels[i].id) {
       removeAll();
+      channels[i].style.display = "flex";
       dataDiv.appendChild(channels[i]);
     }
   }
@@ -239,11 +238,12 @@ var validateEmailId = function() {
   let emailId = document.getElementById("email").value;
   //regular expression to validate email id.
   let emailRegex = /^[a-z0-9._]+@[a-z0-9]+.[a-z]{2,3}/;
+  let errorMessage = document.getElementById("error");
   if (emailRegex.test(emailId)) {
-    //if email id is valid then saving it to local storag.
+    //if email id is valid then saving it to local storage.
+    errorMessage.innerText = "";
     localStorage.setItem("EmailId", emailId);
   } else {
-    let errorMessage = document.getElementById("error");
     errorMessage.innerText = "Invalid Email id";
     errorMessage.style.color = "red";
   }
