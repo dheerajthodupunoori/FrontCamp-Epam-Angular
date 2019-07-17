@@ -5,8 +5,11 @@ var channelsData = [
   {
     name: "Canada",
     logopath: "./Assets/canada.png",
-    address:
-      "TORONTO 5 Park Home Avenue, Suite 400, ON M2N 6L4, North York, Toronto Canada"
+    address: `TORONTO 5 Park Home Avenue,
+       Suite 400, 
+       ON M2N 6L4, 
+       North York,
+        Toronto Canada`
   },
   {
     name: "Mexico",
@@ -141,14 +144,34 @@ var createContent = function() {
   displayAll(dataDiv);
   document.body.appendChild(mainDivision);
 };
+
+var createPopUp = function() {
+  let popUpContainer = document.createElement("div");
+  popUpContainer.setAttribute("id", "popup");
+  popUpContainer.setAttribute("class", "overlay");
+  let closePopUp = document.createElement("button");
+  closePopUp.setAttribute("id", "close");
+  closePopUp.innerText = "X";
+  closePopUp.addEventListener("click", closePop);
+  let popUpContent = document.createElement("p");
+  popUpContent.setAttribute("id", "popUpContent");
+  popUpContent.innerText = channelsData[this.id].address;
+  popUpContainer.appendChild(closePopUp);
+  popUpContainer.appendChild(popUpContent);
+  mainDivision.appendChild(popUpContainer);
+};
+
+var closePop = function() {
+  document.getElementById("popup").remove();
+};
+
 var generateItems = function() {
   let divisions = [];
-
   // this loop will create 10 items
   for (let i = 0; i < 10; i++) {
     let newsFeed = document.createElement("div");
     newsFeed.setAttribute("class", "flex-container");
-    newsFeed.setAttribute("id", i + 1);
+    newsFeed.setAttribute("id", i);
     let logo = document.createElement("div");
     logo.setAttribute("class", "logo");
     let logoImage = document.createElement("img");
@@ -164,8 +187,8 @@ var generateItems = function() {
     let clickToReadMore = document.createElement("button");
     clickToReadMore.setAttribute("value", "Continue Reading");
     clickToReadMore.setAttribute("class", "continue-reading");
-    clickToReadMore.setAttribute("id", i + 1);
-    clickToReadMore.addEventListener("click", showPoPUp);
+    clickToReadMore.setAttribute("id", i);
+    clickToReadMore.addEventListener("click", createPopUp);
     clickToReadMore.innerText = "Continue Reading";
     content.appendChild(title);
     content.appendChild(description);
@@ -190,7 +213,7 @@ var createCategories = function() {
   selectFragment.appendChild(allCategory);
   for (let i = 0; i < 10; i++) {
     let category = document.createElement("option");
-    category.setAttribute("value", i + 1);
+    category.setAttribute("value", i);
     category.innerText = channelsData[i].name;
     selectFragment.appendChild(category);
   }
@@ -228,10 +251,6 @@ var displaySelectedItem = function() {
     }
   }
 };
-// to show popup when continue reading button is clicked
-function showPoPUp() {
-  alert(channelsData[this.id - 1].address);
-}
 
 //This function is to validate an email Id entered by the user.
 var validateEmailId = function() {

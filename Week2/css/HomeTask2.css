@@ -66,3 +66,18 @@
   height: 200px;
   width: 200px;
 }
+#popup {
+  position: fixed;
+  height: 200px;
+  width: 200px;
+  bottom: 50%;
+  right: 50%;
+  top: 50%;
+  border: 2px solid;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+#popUpContent {
+  text-align: center;
+}
