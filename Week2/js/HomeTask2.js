@@ -1,10 +1,9 @@
 document.title = "FrontCamp Training Task Two";
 var mainDivision = document.createElement("div");
 var dataDiv = document.createElement("div");
-function CreatePage() {
+function createPage() {
   // navbar
   let header = document.createElement("div");
-  header.className = "header";
   header.setAttribute("class", "header");
   let title = document.createElement("h1");
   title.innerText = "NEWSFEED";
@@ -16,11 +15,11 @@ function CreatePage() {
   header.appendChild(another_feedback);
   document.body.appendChild(header);
   // navbar end
-  CreateContent();
+  createContent();
 }
 
 // this method creates the main content of the body
-var CreateContent = function() {
+var createContent = function() {
   mainDivision.setAttribute("class", "maindiv");
   mainDivision.setAttribute("id", "maindiv");
 
@@ -33,16 +32,16 @@ var CreateContent = function() {
   mainContainer.appendChild(logo);
   mainContainer.appendChild(content);
 
-  var category = document.createElement("div");
+  let category = document.createElement("div");
   category.setAttribute("class", "category");
-  var categories = createCategories();
-  var emailInputField = document.createElement("input");
+  let categories = createCategories();
+  let emailInputField = document.createElement("input");
   emailInputField.setAttribute("type", "text");
   emailInputField.setAttribute("name", "fname");
   emailInputField.setAttribute("class", "input");
   emailInputField.setAttribute("id", "email");
   emailInputField.addEventListener("blur", validateEmailId);
-  var subscribe = document.createElement("button");
+  let subscribe = document.createElement("button");
   subscribe.setAttribute("value", "Subscribe");
   subscribe.setAttribute("class", "subscribe-button");
   subscribe.innerText = "Subscribe";
@@ -69,7 +68,7 @@ var generateItems = function() {
     "Ireland",
     "Netherlands"
   ];
-  let logoPaths = [
+  const logoPaths = [
     "./Assets/canada.png",
     "./Assets/mexico.png",
     "./Assets/us.png",
@@ -82,10 +81,10 @@ var generateItems = function() {
     "./Assets/netherlands.png"
   ];
   // this loop will create 10 items
-  for (var i = 0; i < 10; i++) {
-    let mainContainer = document.createElement("div");
-    mainContainer.setAttribute("class", "flex-container");
-    mainContainer.setAttribute("id", i + 1);
+  for (let i = 0; i < 10; i++) {
+    let newsFeed = document.createElement("div");
+    newsFeed.setAttribute("class", "flex-container");
+    newsFeed.setAttribute("id", i + 1);
     let logo = document.createElement("div");
     logo.setAttribute("class", "logo");
     let logoImage = document.createElement("img");
@@ -114,9 +113,9 @@ var generateItems = function() {
     content.appendChild(title);
     content.appendChild(description);
     content.appendChild(clickToReadMore);
-    mainContainer.appendChild(logo);
-    mainContainer.appendChild(content);
-    divisions[i] = mainContainer;
+    newsFeed.appendChild(logo);
+    newsFeed.appendChild(content);
+    divisions[i] = newsFeed;
   }
   return divisions;
 };
@@ -139,12 +138,12 @@ var createCategories = function() {
   selectCategory.setAttribute("class", "dropdown");
   selectCategory.setAttribute("id", "dropdown");
   selectCategory.addEventListener("change", displaySelectedItem);
-  var category = document.createElement("option");
-  category.setAttribute("value", "ALL");
-  category.innerText = "ALL";
-  selectCategory.appendChild(category);
-  for (var i = 0; i < 10; i++) {
-    var category = document.createElement("option");
+  let allCategory = document.createElement("option");
+  allCategory.setAttribute("value", "ALL");
+  allCategory.innerText = "ALL";
+  selectCategory.appendChild(allCategory);
+  for (let i = 0; i < 10; i++) {
+    let category = document.createElement("option");
     category.setAttribute("value", i + 1);
     category.innerText = channelNames[i];
     selectCategory.appendChild(category);
@@ -178,7 +177,7 @@ var displaySelectedItem = function() {
     removeAll();
     displayAll(dataDiv);
   }
-  for (var i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     if (selectedItem == channels[i].id) {
       removeAll();
       dataDiv.appendChild(channels[i]);
