@@ -1,6 +1,90 @@
 document.title = "FrontCamp Training Task Two";
 var mainDivision = document.createElement("div");
 var dataDiv = document.createElement("div");
+var channelsData = [
+  {
+    name: "Canada",
+    logopath: "./Assets/canada.png",
+    address:
+      "TORONTO 5 Park Home Avenue, Suite 400, ON M2N 6L4, North York, Toronto Canada"
+  },
+  {
+    name: "Mexico",
+    logopath: "./Assets/mexico.png",
+    address: `GUADALAJARA
+      Periférico Sur #8110,
+      Col. El Mante
+      45609 Tlaquepaque, Jalisco
+      Mexico`
+  },
+  {
+    name: "Us",
+    logopath: "./Assets/us.png",
+    address: `NEWTOWN, PA
+      41 University Drive,
+      Suite 202,
+      Newtown, PA 18940
+      USA`
+  },
+  {
+    name: "Austria",
+    logopath: "./Assets/austria.png",
+    address: `VIENNA
+      Nottendorfer Gasse 11,
+      1030 Wien
+      Austria `
+  },
+  {
+    name: "Bulgaria",
+    logopath: "./Assets/bulgaria.png",
+    address: `SOFIA
+      69 Bulgaria Blvd.,
+      Infinity Tower,
+      1404 Sofia
+      Bulgaria`
+  },
+  {
+    name: "Republic",
+    logopath: "./Assets/republic.png",
+    address: `PRAGUE
+      City Tower building,
+      Hvezdova 2b,
+      Prague 4
+      Czech Republic`
+  },
+  {
+    name: "Germany",
+    logopath: "./Assets/germany.png",
+    address:
+      "TORONTO 5 Park Home Avenue, Suite 400, ON M2N 6L4, North York, Toronto Canada"
+  },
+  {
+    name: "Hungary",
+    logopath: "./Assets/hungary.png",
+    address: `FRANKFURT AM MAIN
+    Franklinstrasse 56, 
+    60486 Frankfurt am Main,
+    Germany`
+  },
+  {
+    name: "Ireland",
+    logopath: "./Assets/ireland.png",
+    address: `DUBLIN
+    Alexandra House,
+    The Sweepstakes,
+    Ballsbridge, Dublin 4,
+    D04 C7H2
+    Ireland`
+  },
+  {
+    name: "Netherlands",
+    logopath: "./Assets/netherlands.png",
+    address: `DELFT
+    Delftechpark 37j
+    2628 XJ Delft
+    Netherlands`
+  }
+];
 function createPage() {
   // navbar
   let header = document.createElement("div");
@@ -45,9 +129,12 @@ var createContent = function() {
   subscribe.setAttribute("value", "Subscribe");
   subscribe.setAttribute("class", "subscribe-button");
   subscribe.innerText = "Subscribe";
+  let errorMessage = document.createElement("p");
+  errorMessage.setAttribute("id", "error");
   category.appendChild(categories);
   category.appendChild(emailInputField);
   category.appendChild(subscribe);
+  category.appendChild(errorMessage);
   mainContainer.appendChild(category);
   mainDivision.appendChild(mainContainer);
   dataDiv.setAttribute("id", "data-div");
@@ -56,30 +143,7 @@ var createContent = function() {
 };
 var generateItems = function() {
   let divisions = [];
-  const titleNames = [
-    "Canada",
-    "Mexico",
-    "Us",
-    "Austria",
-    "Bulgaria",
-    "Republic",
-    "Germany",
-    "Hungary",
-    "Ireland",
-    "Netherlands"
-  ];
-  const logoPaths = [
-    "./Assets/canada.png",
-    "./Assets/mexico.png",
-    "./Assets/us.png",
-    "./Assets/austria.png",
-    "./Assets/bulgaria.png",
-    "./Assets/republic.png",
-    "./Assets/germany.png",
-    "./Assets/hungary.png",
-    "./Assets/ireland.png",
-    "./Assets/netherlands.png"
-  ];
+
   // this loop will create 10 items
   for (let i = 0; i < 10; i++) {
     let newsFeed = document.createElement("div");
@@ -88,22 +152,15 @@ var generateItems = function() {
     let logo = document.createElement("div");
     logo.setAttribute("class", "logo");
     let logoImage = document.createElement("img");
-    logoImage.setAttribute("src", logoPaths[i]);
+    logoImage.setAttribute("src", channelsData[i].logopath);
     logoImage.setAttribute("class", "logo-image");
     logo.appendChild(logoImage);
     let content = document.createElement("div");
     content.setAttribute("class", "content");
     let title = document.createElement("h3");
-    title.innerText = titleNames[i];
+    title.innerText = channelsData[i].name;
     let description = document.createElement("p");
-    description.innerText =
-      "We have helped over 120 Fortune 1000 companies in the following" +
-      "industries solve their most complex technology challenges. Now see " +
-      "what we can do for you. We have helped over 120 Fortune 1000 companies" +
-      "in the following industries solve their most complex technology" +
-      "challenges. Now see what we can do for you. We have helped over 120" +
-      "Fortune 1000 companies in the following industries solve their most" +
-      "complex technology challenges. Now see what we can do for you";
+    description.innerText = `We have helped over 120 Fortune 1000 companies in the followingindustries solve their most complex technology challenges. Now see what we can do for you. We have helped over 120 Fortune 1000 companiesin the following industries solve their most complex technologychallenges. Now see what we can do for you. We have helped over 120Fortune 1000 companies in the following industries solve their mostcomplex technology challenges. Now see what we can do for you`;
     let clickToReadMore = document.createElement("button");
     clickToReadMore.setAttribute("value", "Continue Reading");
     clickToReadMore.setAttribute("class", "continue-reading");
@@ -123,18 +180,6 @@ var channels = generateItems();
 
 var createCategories = function() {
   let selectCategory = document.createElement("select");
-  let channelNames = [
-    "Canada",
-    "Mexico",
-    "UnitedStates",
-    "Austria",
-    "Bulgaria",
-    "Czech Republic",
-    "Germany",
-    "Hungary",
-    "Ireland",
-    "Netherlands"
-  ];
   selectCategory.setAttribute("class", "dropdown");
   selectCategory.setAttribute("id", "dropdown");
   selectCategory.addEventListener("change", displaySelectedItem);
@@ -145,7 +190,7 @@ var createCategories = function() {
   for (let i = 0; i < 10; i++) {
     let category = document.createElement("option");
     category.setAttribute("value", i + 1);
-    category.innerText = channelNames[i];
+    category.innerText = channelsData[i].name;
     selectCategory.appendChild(category);
   }
   return selectCategory;
@@ -186,7 +231,7 @@ var displaySelectedItem = function() {
 };
 // to show popup when continue reading button is clicked
 function showPoPUp() {
-  alert("Hello");
+  alert(channelsData[this.id - 1].address);
 }
 
 //This function is to validate an email Id entered by the user.
@@ -198,6 +243,8 @@ var validateEmailId = function() {
     //if email id is valid then saving it to local storag.
     localStorage.setItem("EmailId", emailId);
   } else {
-    alert("Invalid EmailId");
+    let errorMessage = document.getElementById("error");
+    errorMessage.innerText = "Invalid Email id";
+    errorMessage.style.color = "red";
   }
 };
