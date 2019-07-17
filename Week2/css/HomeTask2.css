@@ -27,6 +27,11 @@
   margin-top: 11px;
   border-width: 0px;
   color: white;
+  border-radius: 10px;
+}
+.continue-reading:hover {
+  background-color: crimson;
+  cursor: pointer;
 }
 .dropdown {
   width: 210px;
