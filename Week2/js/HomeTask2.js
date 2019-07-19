@@ -104,6 +104,17 @@ function createPage() {
   // navbar end
   createContent();
 }
+var createPopUp = function() {
+  document.getElementById("popup").style.display = "flex";
+  document.getElementById("popUpContent").innerText =
+    channelsData[this.id].address;
+  document.body.style.overflow = "hidden";
+};
+
+var closePop = function() {
+  document.getElementById("popup").style.display = "none";
+  document.body.style.overflow = "scroll";
+};
 
 // this method creates the main content of the body
 var createContent = function() {
@@ -142,27 +153,21 @@ var createContent = function() {
   mainDivision.appendChild(mainContainer);
   dataDiv.setAttribute("id", "data-div");
   displayAll(dataDiv);
-  document.body.appendChild(mainDivision);
-};
-
-var createPopUp = function() {
+  //POPUP
   let popUpContainer = document.createElement("div");
   popUpContainer.setAttribute("id", "popup");
   popUpContainer.setAttribute("class", "overlay");
+  popUpContainer.style.display = "none";
   let closePopUp = document.createElement("button");
   closePopUp.setAttribute("id", "close");
   closePopUp.innerText = "X";
   closePopUp.addEventListener("click", closePop);
   let popUpContent = document.createElement("p");
   popUpContent.setAttribute("id", "popUpContent");
-  popUpContent.innerText = channelsData[this.id].address;
   popUpContainer.appendChild(closePopUp);
   popUpContainer.appendChild(popUpContent);
   mainDivision.appendChild(popUpContainer);
-};
-
-var closePop = function() {
-  document.getElementById("popup").remove();
+  document.body.appendChild(mainDivision);
 };
 
 var generateItems = function() {
