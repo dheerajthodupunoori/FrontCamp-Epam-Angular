@@ -38,6 +38,7 @@
 }
 .select-div {
   text-align: center;
+  margin: 10px;
 }
 .select-channel {
   background-color: #97a1b0;
@@ -82,4 +83,8 @@
   width: 200px;
   margin: 10px;
   text-align: center;
+}
+.logo-image {
+  height: 200px;
+  width: 200px;
 }
