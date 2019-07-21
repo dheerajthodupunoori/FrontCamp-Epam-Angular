@@ -42,7 +42,6 @@
 }
 .select-channel {
   background-color: #97a1b0;
-
   width: 130px;
 }
 
@@ -60,6 +59,11 @@
   margin-top: 11px;
   border-width: 0px;
   color: white;
+  border-radius: 3px;
+}
+.continue-reading:hover {
+  background-color: crimson;
+  cursor: pointer;
 }
 .dropdown {
   width: 210px;

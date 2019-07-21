@@ -1,8 +1,8 @@
-export default function createAuthorsDivision(authors,channelId) {
-   console.log(channelId);
+export default function createAuthorsDivision(authors, channelId) {
+  //console.log(authors);
   let authorsDiv = document.getElementById("authors-division");
   let specificChannelDiv = document.createElement("div");
-  specificChannelDiv.setAttribute("id",channelId);
+  specificChannelDiv.setAttribute("id", channelId);
   authors.forEach(author => {
     let newsFeed = document.createElement("div");
     newsFeed.setAttribute("class", "flex-container");
@@ -17,15 +17,20 @@ export default function createAuthorsDivision(authors,channelId) {
     content.setAttribute("class", "content");
     let title = document.createElement("h3");
     title.innerText = author.title;
+    let publishedAt = document.createElement("h5");
+    publishedAt.innerText = `Published At: ${author.publishedAt}`;
     let description = document.createElement("p");
     description.innerText = author.description;
     let clickToReadMore = document.createElement("button");
     clickToReadMore.setAttribute("value", "Continue Reading");
     clickToReadMore.setAttribute("class", "continue-reading");
     // clickToReadMore.setAttribute("id", i);
-    // clickToReadMore.addEventListener("click", createPopUp);
+    clickToReadMore.addEventListener("click", function() {
+      window.open(author.url);
+    });
     clickToReadMore.innerText = "Continue Reading";
     content.appendChild(title);
+    content.appendChild(publishedAt);
     content.appendChild(description);
     content.appendChild(clickToReadMore);
     newsFeed.appendChild(logo);

@@ -1,4 +1,3 @@
-// import { newsApiEndPoint } from "./Endpoints.js";
 import getChannels from "./GetListOfChannels.js";
 import createChannelDropdown from "./GenerateDropdown.js";
 import getAuthorsList from "./GetAuthors.js";
@@ -13,13 +12,10 @@ channels.then(data => {
   createChannelDropdown(data);
 });
 var getAuthors = function() {
-  console.log("inside get authors");
+  //console.log("inside get authors");
   let channelExists = false;
-  let indexOfSelectedChannel;
   let selectedChannel = document.getElementById("select-channel");
   let channelId = selectedChannel.value;
-  // sessionStorage.setItem("channelId",channelId);
-  // console.log(selectedChannels.length);
   if (selectedChannels.length != 0) {
     selectedChannels.forEach(channel => {
       if (channel === channelId) {
@@ -28,16 +24,13 @@ var getAuthors = function() {
     });
   }
   if (channelExists) {
-    indexOfSelectedChannel = selectedChannels.indexOf(channelId);
     hideUnnecessaryChannels(selectedChannels);
     displayHiddenAuthors(channelId);
   } else {
     hideUnnecessaryChannels(selectedChannels);
     selectedChannels.push(channelId);
     authors = getAuthorsList(channelId);
-    //   console.log(authors);
     authors.then(data => {
-      // console.log(data);
       createAuthorsDivision(data, channelId);
     });
   }
