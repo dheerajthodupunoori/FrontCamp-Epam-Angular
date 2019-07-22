@@ -1,5 +1,4 @@
 export default function createAuthorsDivision(authors, channelId) {
-  //console.log(authors);
   let authorsDiv = document.getElementById("authors-division");
   let specificChannelDiv = document.createElement("div");
   specificChannelDiv.setAttribute("id", channelId);
@@ -24,7 +23,6 @@ export default function createAuthorsDivision(authors, channelId) {
     let clickToReadMore = document.createElement("button");
     clickToReadMore.setAttribute("value", "Continue Reading");
     clickToReadMore.setAttribute("class", "continue-reading");
-    // clickToReadMore.setAttribute("id", i);
     clickToReadMore.addEventListener("click", function() {
       window.open(author.url);
     });

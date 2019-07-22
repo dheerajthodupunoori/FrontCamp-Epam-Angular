@@ -12,16 +12,11 @@ channels.then(data => {
   createChannelDropdown(data);
 });
 var getAuthors = function() {
-  //console.log("inside get authors");
   let channelExists = false;
   let selectedChannel = document.getElementById("select-channel");
   let channelId = selectedChannel.value;
   if (selectedChannels.length != 0) {
-    selectedChannels.forEach(channel => {
-      if (channel === channelId) {
-        channelExists = true;
-      }
-    });
+    channelExists = selectedChannels.includes(channelId);
   }
   if (channelExists) {
     hideUnnecessaryChannels(selectedChannels);
@@ -41,6 +36,5 @@ var getAuthors = function() {
 function addOnChangedEventListenerToDropDown() {
   var selectedChannel = document.getElementById("select-channel");
   selectedChannel.addEventListener("change", getAuthors);
-  //   console.log("added event listener");
 }
 addOnChangedEventListenerToDropDown();
