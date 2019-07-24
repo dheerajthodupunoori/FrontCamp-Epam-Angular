@@ -5,7 +5,6 @@ export default function getAuthorsList(channelId) {
   const url = `${channelAuthorEndpoint}source=${channelId}&apiKey=${
     newsApiEndPoint.key
   }`;
-  // console.log(url);
   return fetch(url)
     .then(response => response.json())
     .then(json => json.articles)

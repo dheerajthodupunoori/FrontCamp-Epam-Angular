@@ -164,14 +164,10 @@ var createContent = function() {
   closePopUp.addEventListener("click", closePop);
   let popUpContent = document.createElement("p");
   popUpContent.setAttribute("id", "popUpContent");
-  popUpContent.innerText = channelsData[this.id].address;
   popUpContainer.appendChild(closePopUp);
   popUpContainer.appendChild(popUpContent);
   mainDivision.appendChild(popUpContainer);
-};
-
-var closePop = function() {
-  document.getElementById("popup").remove();
+  document.body.appendChild(mainDivision);
 };
 
 var generateItems = function() {
