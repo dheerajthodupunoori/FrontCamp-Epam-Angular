@@ -1,4 +1,6 @@
-export default function displayHiddenAuthors(channelId) {
-  let channelDivToDisplay = document.getElementById(channelId);
-  channelDivToDisplay.style.display = "block";
+export default function displayHiddenAuthors() {
+  let channelToDisplay = document.getElementById("authors-division").childNodes;
+  channelToDisplay.forEach(channel => {
+    channel.style.display = "flex";
+  });
 }

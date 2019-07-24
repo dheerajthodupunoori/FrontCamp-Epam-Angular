@@ -1,7 +1,5 @@
-export default function createAuthorsDivision(authors, channelId) {
+export default function createAuthorsDivision(authors) {
   let authorsDiv = document.getElementById("authors-division");
-  let specificChannelDiv = document.createElement("div");
-  specificChannelDiv.setAttribute("id", channelId);
   authors.forEach(author => {
     let newsFeed = document.createElement("div");
     newsFeed.setAttribute("class", "flex-container");
@@ -15,17 +13,19 @@ export default function createAuthorsDivision(authors, channelId) {
     let content = document.createElement("div");
     content.setAttribute("class", "content");
     let title = document.createElement("h3");
+    title.setAttribute("class", "title");
     title.innerText = author.title;
     let publishedAt = document.createElement("h5");
+    publishedAt.setAttribute("class", "published");
     publishedAt.innerText = `Published At: ${author.publishedAt}`;
     let description = document.createElement("p");
     description.innerText = author.description;
+    description.setAttribute("class", "description");
     let clickToReadMore = document.createElement("button");
     clickToReadMore.setAttribute("value", "Continue Reading");
     clickToReadMore.setAttribute("class", "continue-reading");
-    clickToReadMore.addEventListener("click", function() {
-      window.open(author.url);
-    });
+    clickToReadMore.setAttribute("id", author.url);
+    clickToReadMore.addEventListener("click", continueReading);
     clickToReadMore.innerText = "Continue Reading";
     content.appendChild(title);
     content.appendChild(publishedAt);
@@ -33,7 +33,10 @@ export default function createAuthorsDivision(authors, channelId) {
     content.appendChild(clickToReadMore);
     newsFeed.appendChild(logo);
     newsFeed.appendChild(content);
-    specificChannelDiv.appendChild(newsFeed);
+    authorsDiv.appendChild(newsFeed);
   });
-  authorsDiv.appendChild(specificChannelDiv);
 }
+
+var continueReading = function() {
+  window.open(this.id);
+};
