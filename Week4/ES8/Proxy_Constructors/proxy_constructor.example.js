@@ -29,23 +29,23 @@
 // 1. Object to proxy and 2. Object serving as the handler
 
 let handler = {
-    // this has all the above properties to trap
-    // get trap // takes 2 args - target object and the property asked for 
-    get: (target, propName) => {
-        // console.log(target, propName);
-        //return undefined;
-        return target[propName];
-    },
-    // set takes 3 args - target obj, property and new val of property
-    set: (target, propName, newVal) => {
-        console.log(target, propName, newVal);
-        target[propName] = newVal;
-    },
-    // has: (target, propName) => {
-    //     // we can use reflex here - pending for next
-    //     console.log("check");
-    // }
-}
+  // this has all the above properties to trap
+  // get trap // takes 2 args - target object and the property asked for
+  get: (target, propName) => {
+    // console.log(target, propName);
+    //return undefined;
+    return target[propName];
+  },
+  // set takes 3 args - target obj, property and new val of property
+  set: (target, propName, newVal) => {
+    console.log(target, propName, newVal);
+    target[propName] = newVal;
+  }
+  // has: (target, propName) => {
+  //     // we can use reflex here - pending for next
+  //     console.log("check");
+  // }
+};
 
 let newObj = new Proxy({}, handler);
 newObj.name = "rob";
@@ -61,8 +61,7 @@ console.log(newObj);
 // }
 
 // restrict user to set non-numeric values for age
-// check if the property is existed in object 
-
+// check if the property is existed in object
 
 // ---------- another example
 
@@ -86,22 +85,21 @@ console.log(newObj);
 // let carProxy = new Proxy(myCar, handler1);
 // console.log(carProxy.make);
 
-
 // --------------------- another example ---------------
 
-function sum (x,y){
-    return x+y;
+function sum(x, y) {
+  return x + y;
 }
 
 let handler2 = {
-    //apply trap takes 3 args - target, the this, argumentlist
-    apply: (target, thisArg, argsList) => {
-        console.log("someone called this function");
-        // return target(argsList[0], argsList[1]) * 100
-    }
-}
+  //apply trap takes 3 args - target, the this, argumentlist
+  apply: (target, thisArg, argsList) => {
+    console.log("someone called this function");
+    // return target(argsList[0], argsList[1]) * 100
+  }
+};
 
 const sumProxy = new Proxy(sum, handler2);
 
-console.log(sum(2,3));
+console.log(sum(2, 3));
 console.log(sumProxy(2, 3));

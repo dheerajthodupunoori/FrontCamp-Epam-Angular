@@ -11,13 +11,11 @@ class superhero {
     this._name = name;
     this._strength = strength;
     this._speed = speed;
-    // this.goodHero = true; // focus on this
   }
   powerUp() {
     this.strength += 5;
   }
   get name() {
-    console.log("get name");
     return this._name;
   }
   set name(newname) {
@@ -29,25 +27,30 @@ class superhero {
 }
 
 class Human extends superhero {
-  constructor(healthpoints, ...superherostuff) {
+  constructor(healthpoints, city, state, ...superherostuff) {
     super(...superherostuff);
     this._healthpoints = healthpoints;
     this._city = city;
     this._state = state;
   }
+  addMrToName() {
+    return `Mr.${super.name}`;
+  }
   set name(name) {
     this._name = name;
   }
-  addMrToName() {
-    return `Mr.${name()}`;
+  incrementPowerByTwo() {
+    this._strength += 2;
   }
-  incrementPowerByTwo() {}
-  reducePoweryHalf() {}
+  reducePoweryHalf() {
+    this._strength /= 2;
+  }
 }
-const details = [20, "Bill", 10, 8];
+const details = [20, "hyderabad", "telangana", "Bill", 10, 8];
 const hero3 = new Human(...details);
 console.log(hero3);
-hero3.name = "sai";
-console.log(hero3);
-const hero4 = new superhero(20, "abc", 8);
-console.log(hero4);
+console.log(hero3.addMrToName());
+hero3.incrementPowerByTwo();
+console.log("After incrementing power by 2:", hero3);
+hero3.reducePoweryHalf();
+console.log("After reducing power by half :", hero3);

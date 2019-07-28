@@ -1,4 +1,4 @@
-// 1. SET 
+// 1. SET
 // Rewrite the sample code below so that every time a property is set a callback runs.
 // your callback will check if the property changed is employees.
 
@@ -7,40 +7,60 @@
 //If not employees, let it pass
 
 let manager = {
-    office: `Dubai`,
-    dept: `sales`,
-    employees: 0
-}
+  office: `Dubai`,
+  dept: `sales`,
+  employees: 0
+};
 
-manager.office = `London` //updates
-manager.employees = ['Jim', 'Patrick', 'Mary']; //updates
-manager.employees = 3; // doesn't update
-manager.employees = null; // updates
-manager.employees = {name:'Jim'} // doesn't update
+let managerHandler = {
+  set: (target, prop, value) => {
+    if (prop === "employees") {
+      if (
+        typeof value === `string` ||
+        value == null ||
+        value instanceof Array
+      ) {
+        target[prop] = value;
+      } else {
+        console.log("cannot be updated with value , ", typeof value, value);
+      }
+    }
+  }
+};
+
+const managerProxy = new Proxy(manager, managerHandler);
+managerProxy.office = `London`; //updates
+managerProxy.employees = ["Jim", "Patrick", "Mary"]; //updates
+console.log("array", manager);
+
+managerProxy.employees = 3; // doesn't update
+console.log("number", manager);
+
+managerProxy.employees = null; // updates
+console.log("null", manager);
+
+managerProxy.employees = { name: "Jim" };
+console.log("complex object", manager);
+
+managerProxy.employees = "qwerty";
+console.log("string", manager); // doesn't update
 
 // 2. GET
 // adjust the following code so that anytime an internal object with accessLevel of 1 is accessed,
 //"Access Denied" is returned.
 
-const users = [
-    {
-        username: `bob`,
-        accessLevel: 1,
-        accessCode: 1234
-    },
-    {
-        username: `Mary`,
-        accessLevel: 2,
-        accessCode: 2345
-    },
-    {
-        username: `Harold`,
-        accessLevel: 2,
-        accessCode: 9999
-    }
-]
+const user = {
+  username: `Harold`,
+  accessLevel: 1,
+  accessCode: 9999
+};
 
-console.log(users[0].username)  // Access Denied
-console.log(users[0].accessCode) // Access Denied
-console.log(users[1].accessCode) // 2345
-console.log(users[2].username) // Harold
+let usersProxyHandler = {
+  get: (target, propName) => {
+    if (target.accessLevel === 1) {
+      console.log("Access Denied");
+    }
+  }
+};
+let usersProxy = new Proxy(user, usersProxyHandler);
+console.log(usersProxy.username);
