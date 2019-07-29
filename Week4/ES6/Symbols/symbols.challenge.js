@@ -3,15 +3,36 @@ const CARMAKE = Symbol();
 const CARMODEL = Symbol();
 
 class Car {
-    constructor(color, make, model) {
-        this[CARCOLOR] = color;
-        this[CARMAKE] = make;
-        this[CARMODEL] = model;
-    }
+  constructor(color, make, model) {
+    this[CARCOLOR] = color;
+    this[CARMAKE] = make;
+    this[CARMODEL] = model;
+  }
+
+  get color() {
+    return this[CARCOLOR];
+  }
+  set color(color) {
+    this[CARCOLOR] = color;
+  }
+  get make() {
+    return this[CARMAKE];
+  }
+  set make(make) {
+    this[CARMAKE] = make;
+  }
+  get model() {
+    return this[CARMODEL];
+  }
+  set model(model) {
+    this[CARMODEL] = model;
+  }
 }
-let myCar = new Car('Red', 'Porsche', 'Cayanne');
-myCar.color = `blue`;
-console.log(myCar.color);
+let myCar = new Car("Red", "Porsche", "Cayanne");
+myCar.color = `Black`;
+myCar.model = `Land Rover`;
+myCar.make = `Jaguar`;
+console.log("color", myCar.color);
 console.log(myCar);
 
 // implement the functionality to set and get values to car color - Black, car model - Land Rover and car maker - Jaguar
