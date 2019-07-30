@@ -49,6 +49,7 @@ console.log("string", manager); // doesn't update
 // adjust the following code so that anytime an internal object with accessLevel of 1 is accessed,
 //"Access Denied" is returned.
 
+//For single object
 const user = {
   username: `Harold`,
   accessLevel: 1,
@@ -64,3 +65,41 @@ let usersProxyHandler = {
 };
 let usersProxy = new Proxy(user, usersProxyHandler);
 console.log(usersProxy.username);
+
+//For array of complex objects.
+let users = [
+  {
+    username: `Harold`,
+    accessLevel: 1,
+    accessCode: 9999
+  },
+  {
+    username: `qwerty`,
+    accessLevel: 2,
+    accessCode: 9999
+  },
+  {
+    username: `asdfg`,
+    accessLevel: 3,
+    accessCode: 9999
+  }
+];
+let usersProxy = new Proxy(users, {
+  get: function(obj, prop) {
+    if (obj[prop].accessLevel === 1) {
+      return "Access Denied!";
+    } else {
+      return obj[prop];
+    }
+  }
+});
+
+console.log(usersProxy[0]);
+console.log(usersProxy[1]);
+console.log(usersProxy[2]);
+console.log(
+  usersProxy[0].username === undefined
+    ? "Access Denied"
+    : usersProxy[0].username
+);
+console.log(usersProxy[2].username);
