@@ -1,0 +1,17 @@
+{
+  "name": "week5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/HomeTask3.js",
+  "scripts": {
+    "start": "webpack",
+    "build": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  }
+}
