@@ -1,4 +1,5 @@
 export default function OverrideData(authors) {
+  console.log(authors);
   for (let i = 0; i < authors.length; i++) {
     document
       .getElementsByClassName("flex-container")
