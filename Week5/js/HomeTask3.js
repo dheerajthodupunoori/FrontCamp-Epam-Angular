@@ -4,6 +4,7 @@ import getAuthorsList from "./GetAuthors.js";
 import createAuthorsDivision from "./GenerateAuthorsDivision.js";
 import getRequiredNumberOfDivisions from "./getRequiredNumberOfDivisions.js";
 import overRidePreviousChannels from "./OverRidePreviousChannels.js";
+import "../css/HomeTask3.css";
 
 var channels = getChannels();
 var authors;
