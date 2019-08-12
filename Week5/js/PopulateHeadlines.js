@@ -3,6 +3,7 @@ export default function populateHeadlines(headlines) {
   headlines.forEach(headline => {
     let newHeadLine = document.createElement("p");
     newHeadLine.innerText = headline.title;
-    // headlineContent.appendChild(newHeadLine);
+    newHeadLine.setAttribute("class", "headline-title");
+    headlineContent.appendChild(newHeadLine);
   });
 }

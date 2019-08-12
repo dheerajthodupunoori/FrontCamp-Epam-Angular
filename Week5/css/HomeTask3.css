@@ -142,3 +142,12 @@
   text-decoration: none;
   cursor: pointer;
 }
+.headline-title {
+  margin: 10px;
+  border-radius: 5px;
+  color: red;
+  padding: 10px;
+  font-size: 20px;
+  align-content: center;
+  background-color: #404040;
+}
