@@ -2,6 +2,12 @@
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
+/******/ 	// object to store loaded chunks
+/******/ 	// "0" means "already loaded"
+/******/ 	var installedChunks = {
+/******/ 		"main": 0
+/******/ 	};
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -26,6 +32,26 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// require() chunk loading for javascript
+/******/
+/******/ 		// "0" is the signal for "already loaded"
+/******/ 		if(installedChunks[chunkId] !== 0) {
+/******/ 			var chunk = require("./" + chunkId + ".bundle.js");
+/******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
+/******/ 			for(var moduleId in moreModules) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 			for(var i = 0; i < chunkIds.length; i++)
+/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -77,7 +103,14 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/dist/";
+/******/
+/******/ 	// uncaught error handler for webpack runtime
+/******/ 	__webpack_require__.oe = function(err) {
+/******/ 		process.nextTick(function() {
+/******/ 			throw err; // catch this error by using import().catch()
+/******/ 		});
+/******/ 	};
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -157,18 +190,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./js/GetHeadlines.js":
-/*!****************************!*\
-  !*** ./js/GetHeadlines.js ***!
-  \****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return getHeadlines; });\n/* harmony import */ var _Endpoints_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Endpoints.js */ \"./js/Endpoints.js\");\n\nfunction getHeadlines() {\n  return fetch(_Endpoints_js__WEBPACK_IMPORTED_MODULE_0__[\"newsApiEndPoint\"].headlinesEndpoint).then(function (response) {\n    return response.json();\n  }).then(function (json) {\n    return json.articles;\n  })[\"catch\"](function (error) {\n    return JSON.stringify(error);\n  });\n}\n\n//# sourceURL=webpack:///./js/GetHeadlines.js?");
-
-/***/ }),
-
 /***/ "./js/GetListOfChannels.js":
 /*!*********************************!*\
   !*** ./js/GetListOfChannels.js ***!
@@ -201,7 +222,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _GetListOfChannels_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GetListOfChannels.js */ \"./js/GetListOfChannels.js\");\n/* harmony import */ var _GenerateDropdown_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GenerateDropdown.js */ \"./js/GenerateDropdown.js\");\n/* harmony import */ var _GetAuthors_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GetAuthors.js */ \"./js/GetAuthors.js\");\n/* harmony import */ var _GenerateAuthorsDivision_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./GenerateAuthorsDivision.js */ \"./js/GenerateAuthorsDivision.js\");\n/* harmony import */ var _getRequiredNumberOfDivisions_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getRequiredNumberOfDivisions.js */ \"./js/getRequiredNumberOfDivisions.js\");\n/* harmony import */ var _OverRidePreviousChannels_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./OverRidePreviousChannels.js */ \"./js/OverRidePreviousChannels.js\");\n/* harmony import */ var _css_HomeTask3_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../css/HomeTask3.css */ \"./css/HomeTask3.css\");\n/* harmony import */ var _css_HomeTask3_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_css_HomeTask3_css__WEBPACK_IMPORTED_MODULE_6__);\n/* harmony import */ var _GetHeadlines_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./GetHeadlines.js */ \"./js/GetHeadlines.js\");\n/* harmony import */ var _PopulateHeadlines_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./PopulateHeadlines.js */ \"./js/PopulateHeadlines.js\");\nfunction ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }\n\nfunction _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n\n\n\n\n\n\n\n\n\nvar channels = Object(_GetListOfChannels_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\nvar authors;\nvar masterData = {};\nchannels.then(function (data) {\n  Object(_GenerateDropdown_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(data);\n});\n\nvar getAuthors = function getAuthors() {\n  var channelExists = false;\n  var selectedChannel = document.getElementById(\"select-channel\");\n  var channelId = selectedChannel.value;\n  var numberOfDivElements = document.getElementById(\"authors-division\").childNodes.length;\n\n  if (masterData.hasOwnProperty(channelId)) {\n    channelExists = true;\n  }\n\n  if (channelExists && numberOfDivElements != 0) {\n    var requiredDivisions = Object(_getRequiredNumberOfDivisions_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])(numberOfDivElements, masterData[channelId]);\n    Object(_OverRidePreviousChannels_js__WEBPACK_IMPORTED_MODULE_5__[\"default\"])(masterData[channelId], requiredDivisions);\n  } else if (!channelExists && numberOfDivElements != 0) {\n    authors = Object(_GetAuthors_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(channelId);\n    authors.then(function (data) {\n      masterData = _objectSpread(_defineProperty({}, channelId, data), masterData);\n      var requiredDivisions = Object(_getRequiredNumberOfDivisions_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])(numberOfDivElements, masterData[channelId]);\n      Object(_OverRidePreviousChannels_js__WEBPACK_IMPORTED_MODULE_5__[\"default\"])(masterData[channelId], requiredDivisions);\n    });\n  } else {\n    authors = Object(_GetAuthors_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(channelId);\n    authors.then(function (data) {\n      masterData = _objectSpread(_defineProperty({}, channelId, data), masterData);\n      Object(_GenerateAuthorsDivision_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(data);\n    });\n  }\n}; // writing this function because this js mentioned as type module so cant use \"onchange\" attribute on select in html\n// https://stackoverflow.com/questions/53069695/cant-call-a-function-from-js-file-imported-as-type-module\n// https://stackoverflow.com/questions/53630310/use-functions-defined-in-es6-module-directly-in-html\n\n\nfunction addOnChangedEventListener() {\n  var selectedChannel = document.getElementById(\"select-channel\");\n  selectedChannel.addEventListener(\"change\", getAuthors);\n  var emailInput = document.getElementById(\"email\");\n  emailInput.addEventListener(\"blur\", validateEmailId);\n}\n\naddOnChangedEventListener(); //This function is to validate an email Id entered by the user.\n\nvar validateEmailId = function validateEmailId() {\n  alert(\"vds\");\n  var emailId = document.getElementById(\"email\").value; //regular expression to validate email id.\n\n  var emailRegex = /^[a-z0-9._]+@[a-z0-9]+.[a-z]{2,3}/;\n  var errorMessage = document.getElementById(\"error\");\n\n  if (emailRegex.test(emailId)) {\n    //if email id is valid then saving it to local storage.\n    errorMessage.innerText = \"\";\n    localStorage.setItem(\"EmailId\", emailId);\n  } else {\n    errorMessage.innerText = \"Invalid Email id\";\n    errorMessage.style.color = \"red\";\n  }\n};\n\nvar modal = document.getElementById(\"myModal\");\nvar btn = document.getElementById(\"headlines\");\nvar span = document.getElementsByClassName(\"close\")[0];\n\nvar getHeadlinesFromAPI = function getHeadlinesFromAPI() {\n  var headlines = Object(_GetHeadlines_js__WEBPACK_IMPORTED_MODULE_7__[\"default\"])();\n  headlines.then(function (data) {\n    Object(_PopulateHeadlines_js__WEBPACK_IMPORTED_MODULE_8__[\"default\"])(data);\n  });\n  modal.style.display = \"block\";\n};\n\nspan.onclick = function () {\n  modal.style.display = \"none\";\n};\n\nwindow.onclick = function (event) {\n  if (event.target == modal) {\n    modal.style.display = \"none\";\n  }\n};\n\nfunction addHeadlinesEventListener() {\n  var headlines = document.getElementById(\"headlines\");\n  headlines.addEventListener(\"click\", getHeadlinesFromAPI);\n}\n\naddHeadlinesEventListener();\n\n//# sourceURL=webpack:///./js/HomeTask3.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _GetListOfChannels_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GetListOfChannels.js */ \"./js/GetListOfChannels.js\");\n/* harmony import */ var _GenerateDropdown_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GenerateDropdown.js */ \"./js/GenerateDropdown.js\");\n/* harmony import */ var _GetAuthors_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GetAuthors.js */ \"./js/GetAuthors.js\");\n/* harmony import */ var _GenerateAuthorsDivision_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./GenerateAuthorsDivision.js */ \"./js/GenerateAuthorsDivision.js\");\n/* harmony import */ var _getRequiredNumberOfDivisions_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getRequiredNumberOfDivisions.js */ \"./js/getRequiredNumberOfDivisions.js\");\n/* harmony import */ var _OverRidePreviousChannels_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./OverRidePreviousChannels.js */ \"./js/OverRidePreviousChannels.js\");\n/* harmony import */ var _css_HomeTask3_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../css/HomeTask3.css */ \"./css/HomeTask3.css\");\n/* harmony import */ var _css_HomeTask3_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_css_HomeTask3_css__WEBPACK_IMPORTED_MODULE_6__);\nfunction ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }\n\nfunction _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n\n\n\n\n\n\n\nvar channels = Object(_GetListOfChannels_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\nvar authors;\nvar masterData = {};\nchannels.then(function (data) {\n  Object(_GenerateDropdown_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(data);\n});\n\nvar getAuthors = function getAuthors() {\n  var channelExists = false;\n  var selectedChannel = document.getElementById(\"select-channel\");\n  var channelId = selectedChannel.value;\n  var numberOfDivElements = document.getElementById(\"authors-division\").childNodes.length;\n\n  if (masterData.hasOwnProperty(channelId)) {\n    channelExists = true;\n  }\n\n  if (channelExists && numberOfDivElements != 0) {\n    var requiredDivisions = Object(_getRequiredNumberOfDivisions_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])(numberOfDivElements, masterData[channelId]);\n    Object(_OverRidePreviousChannels_js__WEBPACK_IMPORTED_MODULE_5__[\"default\"])(masterData[channelId], requiredDivisions);\n  } else if (!channelExists && numberOfDivElements != 0) {\n    authors = Object(_GetAuthors_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(channelId);\n    authors.then(function (data) {\n      masterData = _objectSpread(_defineProperty({}, channelId, data), masterData);\n      var requiredDivisions = Object(_getRequiredNumberOfDivisions_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])(numberOfDivElements, masterData[channelId]);\n      Object(_OverRidePreviousChannels_js__WEBPACK_IMPORTED_MODULE_5__[\"default\"])(masterData[channelId], requiredDivisions);\n    });\n  } else {\n    authors = Object(_GetAuthors_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(channelId);\n    authors.then(function (data) {\n      masterData = _objectSpread(_defineProperty({}, channelId, data), masterData);\n      Object(_GenerateAuthorsDivision_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(data);\n    });\n  }\n}; // writing this function because this js mentioned as type module so cant use \"onchange\" attribute on select in html\n// https://stackoverflow.com/questions/53069695/cant-call-a-function-from-js-file-imported-as-type-module\n// https://stackoverflow.com/questions/53630310/use-functions-defined-in-es6-module-directly-in-html\n\n\nfunction addOnChangedEventListener() {\n  var selectedChannel = document.getElementById(\"select-channel\");\n  selectedChannel.addEventListener(\"change\", getAuthors);\n  var emailInput = document.getElementById(\"email\");\n  emailInput.addEventListener(\"blur\", validateEmailId);\n}\n\naddOnChangedEventListener(); //This function is to validate an email Id entered by the user.\n\nvar validateEmailId = function validateEmailId() {\n  alert(\"vds\");\n  var emailId = document.getElementById(\"email\").value; //regular expression to validate email id.\n\n  var emailRegex = /^[a-z0-9._]+@[a-z0-9]+.[a-z]{2,3}/;\n  var errorMessage = document.getElementById(\"error\");\n\n  if (emailRegex.test(emailId)) {\n    //if email id is valid then saving it to local storage.\n    errorMessage.innerText = \"\";\n    localStorage.setItem(\"EmailId\", emailId);\n  } else {\n    errorMessage.innerText = \"Invalid Email id\";\n    errorMessage.style.color = \"red\";\n  }\n};\n\nvar modal = document.getElementById(\"myModal\");\nvar btn = document.getElementById(\"headlines\");\nvar span = document.getElementsByClassName(\"close\")[0];\n\nvar getHeadlinesFromAPI = function getHeadlinesFromAPI() {\n  __webpack_require__.e(/*! import() | GetHeadlines */ \"GetHeadlines\").then(__webpack_require__.bind(null, /*! ./GetHeadlines.js */ \"./js/GetHeadlines.js\")).then(function (module) {\n    var headlineData = module.getHeadlines();\n    headlineData.then(function (data) {\n      __webpack_require__.e(/*! import() | PopulateHeadlineData */ \"PopulateHeadlineData\").then(__webpack_require__.bind(null, /*! ./PopulateHeadlines.js */ \"./js/PopulateHeadlines.js\")).then(function (module) {\n        module.populateHeadlines(data);\n      });\n    });\n  }); // var headlines = getHeadlines();\n  // headlines.then(data => {\n  //   console.log(data);\n  //   populateModalWithHeadlines(data);\n  // });\n\n  modal.style.display = \"block\";\n};\n\nspan.onclick = function () {\n  modal.style.display = \"none\";\n};\n\nwindow.onclick = function (event) {\n  if (event.target == modal) {\n    modal.style.display = \"none\";\n  }\n};\n\nfunction addHeadlinesEventListener() {\n  var headlines = document.getElementById(\"headlines\");\n  headlines.addEventListener(\"click\", getHeadlinesFromAPI);\n}\n\naddHeadlinesEventListener();\n\n//# sourceURL=webpack:///./js/HomeTask3.js?");
 
 /***/ }),
 
@@ -226,18 +247,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return OverrideData; });\nfunction OverrideData(authors) {\n  for (var i = 0; i < authors.length; i++) {\n    document.getElementsByClassName(\"flex-container\")[i].setAttribute(\"id\", authors[i].author);\n    document.getElementsByClassName(\"logo-image\")[i].setAttribute(\"src\", authors[i].urlToImage);\n    document.getElementsByClassName(\"title\")[i].innerText = authors[i].title;\n    document.getElementsByClassName(\"published\")[i].innerText = \"Published At: \".concat(authors[i].publishedAt);\n    document.getElementsByClassName(\"description\")[i].innerText = authors[i].description;\n    document.getElementsByClassName(\"continue-reading\")[i].setAttribute(\"id\", authors[i].url);\n  }\n}\n\n//# sourceURL=webpack:///./js/OverrideData.js?");
-
-/***/ }),
-
-/***/ "./js/PopulateHeadlines.js":
-/*!*********************************!*\
-  !*** ./js/PopulateHeadlines.js ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return populateHeadlines; });\nfunction populateHeadlines(headlines) {\n  var headlineContent = document.getElementById(\"modal-content\");\n  headlines.forEach(function (headline) {\n    var newHeadLine = document.createElement(\"p\");\n    newHeadLine.innerText = headline.title;\n    newHeadLine.setAttribute(\"class\", \"headline-title\");\n    headlineContent.appendChild(newHeadLine);\n  });\n}\n\n//# sourceURL=webpack:///./js/PopulateHeadlines.js?");
 
 /***/ }),
 

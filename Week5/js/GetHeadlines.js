@@ -1,6 +1,6 @@
 import { newsApiEndPoint } from "./Endpoints.js";
 
-export default function getHeadlines() {
+export function getHeadlines() {
   console.log("called");
   return fetch(newsApiEndPoint.headlinesEndpoint)
     .then(response => response.json())

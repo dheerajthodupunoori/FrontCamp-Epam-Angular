@@ -1,4 +1,4 @@
-export default function populateHeadlines(headlines) {
+export function populateHeadlines(headlines) {
   let headlineContent = document.getElementById("modal-content");
   headlines.forEach(headline => {
     let newHeadLine = document.createElement("p");

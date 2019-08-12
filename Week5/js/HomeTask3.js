@@ -5,8 +5,6 @@ import createAuthorsDivision from "./GenerateAuthorsDivision.js";
 import getRequiredNumberOfDivisions from "./getRequiredNumberOfDivisions.js";
 import overRidePreviousChannels from "./OverRidePreviousChannels.js";
 import "../css/HomeTask3.css";
-import getHeadlines from "./GetHeadlines.js";
-import populateModalWithHeadlines from "./PopulateHeadlines.js";
 
 var channels = getChannels();
 var authors;
@@ -85,11 +83,25 @@ var modal = document.getElementById("myModal");
 var btn = document.getElementById("headlines");
 var span = document.getElementsByClassName("close")[0];
 var getHeadlinesFromAPI = function() {
-  var headlines = getHeadlines();
-  headlines.then(data => {
-    console.log(data);
-    populateModalWithHeadlines(data);
+  import(
+    /* webpackChunkName: "GetHeadlines" */
+    "./GetHeadlines.js"
+  ).then(module => {
+    let headlineData = module.getHeadlines();
+    headlineData.then(data => {
+      import(
+        /* webpackChunkName: "PopulateHeadlineData" */
+        "./PopulateHeadlines.js"
+      ).then(module => {
+        module.populateHeadlines(data);
+      });
+    });
   });
+  // var headlines = getHeadlines();
+  // headlines.then(data => {
+  //   console.log(data);
+  //   populateModalWithHeadlines(data);
+  // });
 
   modal.style.display = "block";
 };

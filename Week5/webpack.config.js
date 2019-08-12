@@ -6,7 +6,8 @@ module.exports = {
   entry: "./js/HomeTask3.js",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/dist/"
   },
   target: "node",
   externals: [nodeExternals()],
@@ -15,7 +16,11 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env"],
+          plugins: ["@babel/plugin-syntax-dynamic-import"]
+        }
       },
       {
         test: /\.css$/,
