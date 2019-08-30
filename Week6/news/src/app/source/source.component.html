@@ -1,0 +1,12 @@
+<div>
+  <h3 class="source-name">{{ sourceName }}</h3>
+  <hr />
+  <div class="container">
+    <app-select-source
+      (sendSourceNameToParent)="sourceName = $event"
+    ></app-select-source>
+    <app-filter></app-filter>
+    <button class="add-article">Add Article</button>
+  </div>
+  <hr />
+</div>

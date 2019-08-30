@@ -1,0 +1,9 @@
+<div class="container">
+  <img src="../../assets/news-icon.jpeg" class="logo" />
+  <button *ngIf="!isLoggedIn; else logout" class="login">LogIn</button>
+  <ng-template #logout>
+    <h3>{{ loggedInUser }}</h3>
+    <button class="login">LogOut</button>
+  </ng-template>
+</div>
+<hr />
