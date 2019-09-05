@@ -9,6 +9,7 @@ import { SourceComponent } from "./source/source.component";
 import { SelectSourceComponent } from "./select-source/select-source.component";
 import { FilterComponent } from "./filter/filter.component";
 import { HttpClientModule } from "@angular/common/http";
+import { NewsService } from "./news.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { HttpClientModule } from "@angular/common/http";
     FilterComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [],
+  providers: [NewsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
