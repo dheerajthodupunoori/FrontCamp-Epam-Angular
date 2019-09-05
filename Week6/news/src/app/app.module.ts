@@ -10,6 +10,7 @@ import { SelectSourceComponent } from "./select-source/select-source.component";
 import { FilterComponent } from "./filter/filter.component";
 import { HttpClientModule } from "@angular/common/http";
 import { NewsService } from "./news.service";
+import { NewsFeedComponent } from './news-feed/news-feed.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NewsService } from "./news.service";
     FooterComponent,
     SourceComponent,
     SelectSourceComponent,
-    FilterComponent
+    FilterComponent,
+    NewsFeedComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [NewsService],

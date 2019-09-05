@@ -7,23 +7,29 @@ import { NewsService } from "../news.service";
   styleUrls: ["./select-source.component.css"]
 })
 export class SelectSourceComponent implements OnInit {
-  selectedSource: string = "";
+  public selectedSourceId: string = "der-tagesspiegel";
   public channels = [];
+  public articles = [];
   @Output() public sendSourceNameToParent = new EventEmitter();
   constructor(private _newsService: NewsService) {}
 
   //Called when component is initialized.
   async ngOnInit() {
+    this.sendSourceNameToParent.emit(this.selectedSourceId);
     this.channels = await this._newsService.getChannels();
-    // channels.then(data => {
-    //   console.log("data", data);
-    //   this.channels = data;
-    // });
     console.log(this.channels);
   }
-  sourceChanged(skill: any) {
-    this.selectedSource = skill;
-    this.sendSourceNameToParent.emit(skill);
-    console.log(skill);
+  sourceChanged(id) {
+    this.selectedSourceId = id;
+    this.sendSourceNameToParent.emit(this.selectedSourceId);
+    this.getArticles();
+    console.log(this.articles);
+    console.log(id);
+  }
+
+  async getArticles() {
+    this.articles = await this._newsService.getAuthorsList(
+      this.selectedSourceId
+    );
   }
 }

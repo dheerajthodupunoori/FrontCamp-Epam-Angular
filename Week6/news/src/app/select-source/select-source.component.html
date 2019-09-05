@@ -1,8 +1,9 @@
-<select class="select-source" (change)="sourceChanged($event.target.value)">
-  <option
-    *ngFor="let channel of channels; let i = index"
-    [selected]="channel.id == 'abc-news-au'"
-    [(ngValue)]="channel.id"
-    >{{ channel.name }}</option
-  >
+<select
+  class="select-source"
+  (change)="sourceChanged(selectedSourceId)"
+  [(ngModel)]="selectedSourceId"
+>
+  <option *ngFor="let channel of channels" [value]="channel.id">
+    {{ channel.name }}
+  </option>
 </select>
