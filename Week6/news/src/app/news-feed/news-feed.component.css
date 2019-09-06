@@ -21,3 +21,11 @@
   height: 200px;
   width: 200px;
 }
+.continue-reading {
+  border-radius: 5px;
+  text-align: center;
+  padding: 4px;
+}
+.continue-reading:hover {
+  cursor: pointer;
+}

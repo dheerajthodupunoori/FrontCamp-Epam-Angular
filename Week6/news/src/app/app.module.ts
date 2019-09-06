@@ -11,6 +11,8 @@ import { FilterComponent } from "./filter/filter.component";
 import { HttpClientModule } from "@angular/common/http";
 import { NewsService } from "./news.service";
 import { NewsFeedComponent } from './news-feed/news-feed.component';
+import { CreateArticleComponent } from './create-article/create-article.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NewsFeedComponent } from './news-feed/news-feed.component';
     SourceComponent,
     SelectSourceComponent,
     FilterComponent,
-    NewsFeedComponent
+    NewsFeedComponent,
+    CreateArticleComponent,
+    PageNotFoundComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [NewsService],
