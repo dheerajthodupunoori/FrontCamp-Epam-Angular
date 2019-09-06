@@ -7,7 +7,7 @@ import { NewsService } from "../news.service";
   styleUrls: ["./select-source.component.css"]
 })
 export class SelectSourceComponent implements OnInit {
-  public selectedSourceId: string = "der-tagesspiegel";
+  public selectedSourceId: string = "bbc-news";
   public channels = [];
   public articles = [];
   @Output() public sendSourceNameToParent = new EventEmitter();
@@ -18,7 +18,9 @@ export class SelectSourceComponent implements OnInit {
   //Called when component is initialized(only once).
   async ngOnInit() {
     this.sendSourceNameToParent.emit(this.selectedSourceId);
-    this.channels = await this._newsService.getChannels();
+    await this._newsService
+      .getChannels()
+      .subscribe(data => (this.channels = data.sources));
     this.articles = await this._newsService.getAuthorsList(
       this.selectedSourceId
     );
