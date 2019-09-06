@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
   selector: "app-news-feed",
@@ -7,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class NewsFeedComponent implements OnInit {
   public date = new Date();
-
+  @Input() public article;
   constructor() {}
 
   ngOnInit() {}

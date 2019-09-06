@@ -4,9 +4,14 @@
   <div class="container">
     <app-select-source
       (sendSourceNameToParent)="sourceName = $event"
+      (sendArticlesToNewsfeedComponent)="articles = $event"
     ></app-select-source>
     <app-filter></app-filter>
     <button class="add-article">Add Article</button>
   </div>
   <hr />
 </div>
+<app-news-feed
+  *ngFor="let article of articles"
+  [article]="article"
+></app-news-feed>

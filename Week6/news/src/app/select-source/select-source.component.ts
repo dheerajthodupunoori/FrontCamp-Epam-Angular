@@ -11,19 +11,29 @@ export class SelectSourceComponent implements OnInit {
   public channels = [];
   public articles = [];
   @Output() public sendSourceNameToParent = new EventEmitter();
+  @Output() public sendArticlesToNewsfeedComponent = new EventEmitter();
+
   constructor(private _newsService: NewsService) {}
 
-  //Called when component is initialized.
+  //Called when component is initialized(only once).
   async ngOnInit() {
     this.sendSourceNameToParent.emit(this.selectedSourceId);
     this.channels = await this._newsService.getChannels();
-    console.log(this.channels);
+    this.articles = await this._newsService.getAuthorsList(
+      this.selectedSourceId
+    );
+    this.sendArticlesToNewsfeedComponent.emit(this.articles);
+    console.log("channels in ngOnInIt()", this.channels);
+    console.log("articles in ngOnInIt()", this.articles);
   }
-  sourceChanged(id) {
+  async sourceChanged(id) {
     this.selectedSourceId = id;
     this.sendSourceNameToParent.emit(this.selectedSourceId);
-    this.getArticles();
-    console.log(this.articles);
+    this.articles = await this._newsService.getAuthorsList(
+      this.selectedSourceId
+    );
+    this.sendArticlesToNewsfeedComponent.emit(this.articles);
+    console.log("articles when dropdwon value changed", this.articles);
     console.log(id);
   }
 

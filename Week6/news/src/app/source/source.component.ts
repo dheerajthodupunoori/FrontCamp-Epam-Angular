@@ -7,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class SourceComponent implements OnInit {
   public sourceName = "";
-
+  public articles = [];
   constructor() {}
 
   ngOnInit() {}

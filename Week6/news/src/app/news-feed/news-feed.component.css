@@ -1,7 +1,6 @@
 .news-container {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
   justify-content: space-between;
   background-color: cadetblue;
   padding: 15px;
@@ -16,4 +15,9 @@
 }
 .news-content {
   align-self: center;
+  width: 600px;
+}
+.news-image {
+  height: 200px;
+  width: 200px;
 }
