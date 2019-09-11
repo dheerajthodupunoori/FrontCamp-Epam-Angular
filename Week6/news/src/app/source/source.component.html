@@ -7,7 +7,7 @@
       (sendArticlesToNewsfeedComponent)="articles = $event"
     ></app-select-source>
     <app-filter></app-filter>
-    <a routerLink="/addArticle"
+    <a routerLink="/addArticle/{{ sourceName }}" [state]="articles"
       ><button class="add-article">Add Article</button></a
     >
   </div>

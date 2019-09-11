@@ -7,13 +7,15 @@ import { NewsService } from "../news.service";
   styleUrls: ["./select-source.component.css"]
 })
 export class SelectSourceComponent implements OnInit {
-  public selectedSourceId: string = "bbc-news";
+  public selectedSourceId: string;
   public channels = [];
   public articles = [];
   @Output() public sendSourceNameToParent = new EventEmitter();
   @Output() public sendArticlesToNewsfeedComponent = new EventEmitter();
 
-  constructor(private _newsService: NewsService) {}
+  constructor(private _newsService: NewsService) {
+    this.selectedSourceId = this._newsService.sourceName;
+  }
 
   //Called when component is initialized(only once).
   async ngOnInit() {
@@ -21,27 +23,24 @@ export class SelectSourceComponent implements OnInit {
     await this._newsService
       .getChannels()
       .subscribe(data => (this.channels = data.sources));
-    this.articles = await this._newsService.getAuthorsList(
+    this._newsService.articles = await this._newsService.getAuthorsList(
       this.selectedSourceId
     );
+    this.articles = this._newsService.articles;
     this.sendArticlesToNewsfeedComponent.emit(this.articles);
-    console.log("channels in ngOnInIt()", this.channels);
-    console.log("articles in ngOnInIt()", this.articles);
+    // console.log("channels in ngOnInIt()", this.channels);
+    // console.log("articles in ngOnInIt()", this.articles);
   }
   async sourceChanged(id) {
-    this.selectedSourceId = id;
+    this._newsService.sourceName = id;
+    this.selectedSourceId = this._newsService.sourceName;
     this.sendSourceNameToParent.emit(this.selectedSourceId);
-    this.articles = await this._newsService.getAuthorsList(
+    this._newsService.articles = await this._newsService.getAuthorsList(
       this.selectedSourceId
     );
+    this.articles = this._newsService.articles;
     this.sendArticlesToNewsfeedComponent.emit(this.articles);
-    console.log("articles when dropdwon value changed", this.articles);
-    console.log(id);
-  }
-
-  async getArticles() {
-    this.articles = await this._newsService.getAuthorsList(
-      this.selectedSourceId
-    );
+    // console.log("articles when dropdwon value changed", this.articles);
+    // console.log(id);
   }
 }

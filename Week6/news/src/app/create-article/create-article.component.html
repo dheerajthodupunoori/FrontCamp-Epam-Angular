@@ -1,5 +1,61 @@
 <div>
   <h2 class="create-article-title">Create Article</h2>
   <hr />
-  <div></div>
+  <form #createArticleForm="ngForm">
+    <!-- {{ createArticleForm.value | json }}
+    <hr />
+    {{ article | json }} -->
+    <div class="form-container">
+      <div class="form-column">
+        <div>
+          <label>Title</label><br /><input
+            type="text"
+            name="title"
+            [(ngModel)]="article.title"
+          />
+        </div>
+        <div>
+          <label>Short description</label><br /><input
+            type="text"
+            name="description"
+            [(ngModel)]="article.description"
+          />
+        </div>
+        <div>
+          <label>Content</label><br /><textarea
+            rows="4"
+            cols="50"
+            name="content"
+            ngModel
+          >
+          </textarea>
+        </div>
+      </div>
+      <div class="form-column">
+        <div>
+          <label>Date</label><br /><input
+            type="date"
+            name="publishedAt"
+            [(ngModel)]="article.publishedAt"
+          />
+        </div>
+        <div>
+          <label>Author</label><br /><input
+            type="text"
+            name="author"
+            [(ngModel)]="article.author"
+          />
+        </div>
+        <div>
+          <label>Source URL</label><br /><input
+            type="text"
+            name="url"
+            [(ngModel)]="article.url"
+          /><br />
+          <a routerLink=""><button>Save</button></a
+          ><a routerLink=""><button>Cancel</button></a>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>

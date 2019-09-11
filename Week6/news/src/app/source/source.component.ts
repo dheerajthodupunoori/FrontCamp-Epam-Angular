@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-source",
@@ -8,7 +9,11 @@ import { Component, OnInit } from "@angular/core";
 export class SourceComponent implements OnInit {
   public sourceName = "";
   public articles = [];
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.sourceName = this.route.snapshot.paramMap.get("article");
+    // console.log("sourceName", this.sourceName);
+    // console.log("sourceName ", history.state);
+  }
 }

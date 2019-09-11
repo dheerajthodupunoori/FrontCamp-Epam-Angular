@@ -7,19 +7,14 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class NewsService {
+  public sourceName = "bbc-news";
+  public articles = [];
   constructor(private http: HttpClient) {}
 
   getChannels(): Observable<any> {
-    // return fetch("https://newsapi.org/v1/sources")
-    //   .then(response => response.json())
-    //   .then(json => json.sources)
-    //   .catch(error => JSON.stringify(error));
-
     return this.http.get("https://newsapi.org/v1/sources");
   }
-  // errorHandler(error: HttpErrorResponse) {
-  //   return Observable.throw(error.message || "Server Error");
-  // }
+
   getAuthorsList(channelId) {
     let channelAuthorEndpoint = newsApiEndPoint.articlesEndPoint;
     const url = `${channelAuthorEndpoint}source=${channelId}&apiKey=${newsApiEndPoint.key}`;

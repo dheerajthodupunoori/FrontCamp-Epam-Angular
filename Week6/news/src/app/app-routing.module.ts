@@ -7,7 +7,10 @@ import { SourceComponent } from "./source/source.component";
 
 const routes: Routes = [
   { path: "", component: SourceComponent },
-  { path: "addArticle", component: CreateArticleComponent },
+  {
+    path: "addArticle/:sourceName",
+    component: CreateArticleComponent
+  },
   { path: "**", component: PageNotFoundComponent }
 ];
 
