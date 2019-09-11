@@ -23,13 +23,11 @@ export class SelectSourceComponent implements OnInit {
     await this._newsService
       .getChannels()
       .subscribe(data => (this.channels = data.sources));
-    this._newsService.articles = await this._newsService.getAuthorsList(
-      this.selectedSourceId
-    );
-    this.articles = this._newsService.articles;
+    // this._newsService.articles = await this._newsService.getAuthorsList(
+    //   this.selectedSourceId
+    // );
+    this.articles = await this._newsService.articles;
     this.sendArticlesToNewsfeedComponent.emit(this.articles);
-    // console.log("channels in ngOnInIt()", this.channels);
-    // console.log("articles in ngOnInIt()", this.articles);
   }
   async sourceChanged(id) {
     this._newsService.sourceName = id;
@@ -38,9 +36,7 @@ export class SelectSourceComponent implements OnInit {
     this._newsService.articles = await this._newsService.getAuthorsList(
       this.selectedSourceId
     );
-    this.articles = this._newsService.articles;
+    this.articles = await this._newsService.articles;
     this.sendArticlesToNewsfeedComponent.emit(this.articles);
-    // console.log("articles when dropdwon value changed", this.articles);
-    // console.log(id);
   }
 }

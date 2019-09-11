@@ -22,13 +22,8 @@
           />
         </div>
         <div>
-          <label>Content</label><br /><textarea
-            rows="4"
-            cols="50"
-            name="content"
-            ngModel
-          >
-          </textarea>
+          <button (click)="addToArticles()">Save</button>
+          <a routerLink=""><button>Cancel</button></a>
         </div>
       </div>
       <div class="form-column">
@@ -49,11 +44,9 @@
         <div>
           <label>Source URL</label><br /><input
             type="text"
-            name="url"
-            [(ngModel)]="article.url"
+            name="urlToImage"
+            [(ngModel)]="article.urlToImage"
           /><br />
-          <a routerLink=""><button>Save</button></a
-          ><a routerLink=""><button>Cancel</button></a>
         </div>
       </div>
     </div>

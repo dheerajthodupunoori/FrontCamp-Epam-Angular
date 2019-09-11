@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Article } from "../article";
 import { NewsService } from "../news.service";
 
@@ -11,16 +11,29 @@ import { NewsService } from "../news.service";
 export class CreateArticleComponent implements OnInit {
   public currentSourceName: string;
   public articles = [];
-  article = new Article("title", "description", "publishedAt", "author", "url");
+  article = new Article("", "", "", "", "", "");
+
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private _newsService: NewsService
   ) {}
 
   ngOnInit() {
     this.currentSourceName = this.route.snapshot.paramMap.get("sourceName");
     console.log(this._newsService.articles);
-    this._newsService.articles.push(this.article);
-    console.log("after adding article", this._newsService.articles);
+  }
+
+  addToArticles() {
+    this._newsService.articles.push({
+      title: this.article.title,
+      author: this.article.author,
+      description: this.article.description,
+      url: this.article.url,
+      urlToImage: this.article.urlToImage,
+      publishedAt: this.article.publishedAt
+    });
+    this.router.navigate([""]);
+    console.log("after adding new article", this._newsService.articles);
   }
 }
