@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: "app-auth",
@@ -11,13 +12,15 @@ export class AuthComponent implements OnInit {
 
   public loggedInUser: string;
 
-  constructor(private route: Router, private router: ActivatedRoute) {
-    this.isLoggedIn =
-      localStorage.getItem("isLoggedIn") === null ? false : true;
-    console.log(this.isLoggedIn);
-  }
+  constructor(
+    private route: Router,
+    private router: ActivatedRoute,
+    private _authService: AuthService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isLoggedIn = Boolean(localStorage.getItem("isLoggedIn"));
+  }
 
   isAlreadyLoggedIn() {
     if (localStorage.getItem("isLoggedIn") === null) {

@@ -15,6 +15,7 @@ import { CreateArticleComponent } from "./create-article/create-article.componen
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { FilterPipe } from "../app/Pipes/filter.pipe";
 import { LoginComponent } from "./login/login.component";
+import { AuthService } from "./auth.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { LoginComponent } from "./login/login.component";
     LoginComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [NewsService],
+  providers: [NewsService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
