@@ -14,6 +14,7 @@ import { NewsFeedComponent } from "./news-feed/news-feed.component";
 import { CreateArticleComponent } from "./create-article/create-article.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { FilterPipe } from "../app/Pipes/filter.pipe";
+import { LoginComponent } from "./login/login.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FilterPipe } from "../app/Pipes/filter.pipe";
     NewsFeedComponent,
     CreateArticleComponent,
     PageNotFoundComponent,
-    FilterPipe
+    FilterPipe,
+    LoginComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [NewsService],

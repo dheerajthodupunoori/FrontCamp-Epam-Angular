@@ -1,0 +1,12 @@
+.login-container {
+  text-align: center;
+  padding: 20px;
+}
+.form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.invalid-user-message {
+  color: red;
+}
