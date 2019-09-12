@@ -33,7 +33,7 @@ export class CreateArticleComponent implements OnInit {
       urlToImage: this.article.urlToImage,
       publishedAt: this.article.publishedAt
     });
-    this.router.navigate([""]);
+    this.router.navigate(["/newsFeed"]);
     console.log("after adding new article", this._newsService.articles);
   }
 }

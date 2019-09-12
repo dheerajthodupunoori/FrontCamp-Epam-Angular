@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "../auth.service";
+import { User } from "../user";
 
 @Component({
   selector: "app-auth",
@@ -12,6 +13,10 @@ export class AuthComponent implements OnInit {
 
   public loggedInUser: string;
 
+  public displayLogInForm: Boolean = false;
+  user = new User("", "");
+  public errorMessage: string;
+
   constructor(
     private route: Router,
     private router: ActivatedRoute,
@@ -22,12 +27,26 @@ export class AuthComponent implements OnInit {
     this.isLoggedIn = Boolean(localStorage.getItem("isLoggedIn"));
   }
 
-  isAlreadyLoggedIn() {
-    if (localStorage.getItem("isLoggedIn") === null) {
-      this.route.navigate(["/login"]);
-    } else {
+  showLogInForm() {
+    this.displayLogInForm = !this.displayLogInForm;
+    console.log(this.displayLogInForm);
+  }
+  validateUser() {
+    this.errorMessage = "";
+    if (this._authService.validateUser(this.user)) {
+      this.displayLogInForm = !this.displayLogInForm;
       this.isLoggedIn = Boolean(localStorage.getItem("isLoggedIn"));
       this.loggedInUser = localStorage.getItem("userName");
+      console.log(this.loggedInUser);
+      this.route.navigate(["/newsFeed"]);
+    } else {
+      this.errorMessage =
+        "Username and Password are not correct. please give correct input";
     }
+  }
+  logOut() {
+    this._authService.logOut();
+    this.isLoggedIn = !this.isLoggedIn;
+    this.route.navigate([""]);
   }
 }
