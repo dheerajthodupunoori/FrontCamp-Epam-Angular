@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class NewsService {
   public sourceName = "bbc-news";
-  public articles;
+  public articles = [];
   constructor(private http: HttpClient) {
     this.getAuthorsList(this.sourceName).then(data => (this.articles = data));
   }

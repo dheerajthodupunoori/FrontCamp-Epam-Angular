@@ -9,11 +9,8 @@ import { ActivatedRoute } from "@angular/router";
 export class SourceComponent implements OnInit {
   public sourceName = "";
   public articles = [];
+  public searchString = "";
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    // this.sourceName = this.route.snapshot.paramMap.get("article");
-    // console.log("sourceName", this.sourceName);
-    // console.log("sourceName ", history.state);
-  }
+  ngOnInit() {}
 }

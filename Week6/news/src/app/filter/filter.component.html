@@ -1,4 +1,9 @@
-<input type="text" class="input-filter" [(ngModel)]="filterString" />
+<input
+  type="text"
+  class="input-filter"
+  [(ngModel)]="filterString"
+  (keyup)="onKey(filterString)"
+/>
 <button class="filter">
   Filter
 </button>

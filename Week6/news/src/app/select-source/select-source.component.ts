@@ -23,9 +23,6 @@ export class SelectSourceComponent implements OnInit {
     await this._newsService
       .getChannels()
       .subscribe(data => (this.channels = data.sources));
-    // this._newsService.articles = await this._newsService.getAuthorsList(
-    //   this.selectedSourceId
-    // );
     this.articles = await this._newsService.articles;
     this.sendArticlesToNewsfeedComponent.emit(this.articles);
   }
