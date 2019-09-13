@@ -4,6 +4,7 @@ import { CreateArticleComponent } from "./create-article/create-article.componen
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { SourceComponent } from "./source/source.component";
 import { InfoComponent } from "./info/info.component";
+import { AuthGuardService as AuthGuard } from "./auth-guard.service";
 
 const routes: Routes = [
   { path: "", component: InfoComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: "newsFeed",
-    component: SourceComponent
+    component: SourceComponent,
+    canActivate: [AuthGuard]
   },
   { path: "**", component: PageNotFoundComponent }
 ];
