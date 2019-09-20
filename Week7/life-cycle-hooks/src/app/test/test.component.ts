@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   Input,
   OnChanges,
   SimpleChanges,
@@ -37,4 +38,10 @@ export class TestComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngDoCheck() {}
+
+  ngOnDestroy() {
+    console.log(
+      "Test component is Destroyed and navigated to another component"
+    );
+  }
 }
