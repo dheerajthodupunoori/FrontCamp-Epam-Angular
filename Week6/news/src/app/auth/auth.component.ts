@@ -29,7 +29,6 @@ export class AuthComponent implements OnInit {
 
   showLogInForm() {
     this.displayLogInForm = !this.displayLogInForm;
-    console.log(this.displayLogInForm);
   }
   validateUser() {
     this.errorMessage = "";
@@ -37,7 +36,6 @@ export class AuthComponent implements OnInit {
       this.displayLogInForm = !this.displayLogInForm;
       this.isLoggedIn = Boolean(localStorage.getItem("isLoggedIn"));
       this.loggedInUser = localStorage.getItem("userName");
-      console.log(this.loggedInUser);
       this.route.navigate(["/newsFeed"]);
     } else {
       this.errorMessage =

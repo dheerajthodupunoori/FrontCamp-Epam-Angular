@@ -8,10 +8,11 @@ import { Observable } from "rxjs";
 })
 export class NewsService {
   public sourceName = "bbc-news";
-  public articles = [];
-  constructor(private http: HttpClient) {
-    this.getAuthorsList(this.sourceName).then(data => (this.articles = data));
-  }
+  public listofArticles = this.getAuthorsList(this.sourceName).then(
+    data => (this.articles = data)
+  );
+  public articles = this.listofArticles;
+  constructor(private http: HttpClient) {}
 
   getChannels(): Observable<any> {
     return this.http.get("https://newsapi.org/v1/sources");
