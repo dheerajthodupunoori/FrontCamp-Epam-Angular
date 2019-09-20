@@ -9,9 +9,14 @@ import { User } from "./user";
 export class AppComponent implements OnInit {
   title = "life-cycle-hooks";
   userText: string = "Angular Task-7";
-  user: User;
+  user = {
+    name: ""
+  };
 
   ngOnInit() {
     console.log("Parent ngOnIt() called");
+  }
+  UpdateUser() {
+    this.user.name = "dheeraj";
   }
 }

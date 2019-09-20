@@ -9,6 +9,12 @@ export class Test2Component implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+  ngAfterContentInit() {
+    console.log("Test2 Components AfterContentInit is called");
+  }
+  ngAfterContentChecked() {
+    console.log("Test2 Components ngAfterContentChecked is called");
+  }
   ngOnDestroy() {
     console.log(
       "Test2 component is Destroyed and navigated to another component"
