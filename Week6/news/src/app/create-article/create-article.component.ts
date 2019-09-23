@@ -21,7 +21,6 @@ export class CreateArticleComponent implements OnInit {
 
   ngOnInit() {
     this.currentSourceName = this.route.snapshot.paramMap.get("sourceName");
-    console.log(this._newsService.articles);
   }
 
   addToArticles() {
@@ -34,6 +33,5 @@ export class CreateArticleComponent implements OnInit {
       publishedAt: this.article.publishedAt
     });
     this.router.navigate(["/newsFeed"]);
-    console.log("after adding new article", this._newsService.articles);
   }
 }

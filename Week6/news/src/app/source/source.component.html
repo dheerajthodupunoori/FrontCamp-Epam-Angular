@@ -3,7 +3,6 @@
   <hr />
   <div class="container">
     <app-select-source
-      (sendSourceNameToParent)="sourceName = $event"
       (sendArticlesToNewsfeedComponent)="articles = $event"
     ></app-select-source>
     <app-filter (sendSearchStringToParent)="searchString = $event"></app-filter>

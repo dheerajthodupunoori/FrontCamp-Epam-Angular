@@ -1,14 +1,17 @@
 import { Injectable } from "@angular/core";
 import { newsApiEndPoint } from "./Config/Endpoint";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class NewsService {
-  public sourceName = "bbc-news";
-  public listofArticles = this.getAuthorsList(this.sourceName).then(
+  private sourceName = new BehaviorSubject<string>("bbc-news");
+  public currentSourceName = this.sourceName.asObservable();
+  public source;
+
+  public listofArticles = this.getAuthorsList().then(
     data => (this.articles = data)
   );
   public articles = this.listofArticles;
@@ -18,12 +21,17 @@ export class NewsService {
     return this.http.get("https://newsapi.org/v1/sources");
   }
 
-  getAuthorsList(channelId) {
+  getAuthorsList(): any {
+    this.currentSourceName.subscribe(data => (this.source = data));
     let channelAuthorEndpoint = newsApiEndPoint.articlesEndPoint;
-    const url = `${channelAuthorEndpoint}source=${channelId}&apiKey=${newsApiEndPoint.key}`;
+    const url = `${channelAuthorEndpoint}source=${this.source}&apiKey=${newsApiEndPoint.key}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => json.articles)
       .catch(error => JSON.stringify(error));
+  }
+
+  updateSourceName(selectedSourceName) {
+    this.sourceName.next(selectedSourceName);
   }
 }

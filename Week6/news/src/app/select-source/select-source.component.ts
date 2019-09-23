@@ -7,32 +7,25 @@ import { NewsService } from "../news.service";
   styleUrls: ["./select-source.component.css"]
 })
 export class SelectSourceComponent implements OnInit {
-  public selectedSourceId: string;
+  public selectedSourceId;
   public channels = [];
   public articles = [];
-  @Output() public sendSourceNameToParent = new EventEmitter();
   @Output() public sendArticlesToNewsfeedComponent = new EventEmitter();
 
-  constructor(private _newsService: NewsService) {
-    this.selectedSourceId = this._newsService.sourceName;
-  }
+  constructor(private _newsService: NewsService) {}
 
   //Called when component is initialized(only once).
   async ngOnInit() {
-    this.sendSourceNameToParent.emit(this.selectedSourceId);
     await this._newsService
       .getChannels()
       .subscribe(data => (this.channels = data.sources));
+
     this.articles = await this._newsService.articles;
     this.sendArticlesToNewsfeedComponent.emit(this.articles);
   }
-  async sourceChanged(id) {
-    this._newsService.sourceName = id;
-    this.selectedSourceId = this._newsService.sourceName;
-    this.sendSourceNameToParent.emit(this.selectedSourceId);
-    this._newsService.articles = await this._newsService.getAuthorsList(
-      this.selectedSourceId
-    );
+  async sourceChanged(selectedSourceName) {
+    this._newsService.updateSourceName(selectedSourceName);
+    this._newsService.articles = await this._newsService.getAuthorsList();
     this.articles = await this._newsService.articles;
     this.sendArticlesToNewsfeedComponent.emit(this.articles);
   }
