@@ -34,4 +34,8 @@ export class CreateArticleComponent implements OnInit {
     });
     this.router.navigate(["/newsFeed"]);
   }
+
+  confirmBeforeNavigate() {
+    return false;
+  }
 }

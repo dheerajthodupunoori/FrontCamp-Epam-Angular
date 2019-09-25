@@ -5,12 +5,15 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { SourceComponent } from "./source/source.component";
 import { InfoComponent } from "./info/info.component";
 import { AuthGuardService as AuthGuard } from "./auth-guard.service";
+import { UnsavedArticle } from "./guards/UnsavedArticle.service";
 
 const routes: Routes = [
   { path: "", component: InfoComponent },
   {
     path: "addArticle/:sourceName",
-    component: CreateArticleComponent
+    component: CreateArticleComponent,
+    canActivate: [AuthGuard],
+    canDeactivate: [UnsavedArticle]
   },
   {
     path: "newsFeed",

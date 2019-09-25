@@ -23,7 +23,9 @@
         </div>
         <div>
           <button (click)="addToArticles()">Save</button>
-          <a routerLink="/newsFeed"><button>Cancel</button></a>
+          <a routerLink="/newsFeed"
+            ><button (click)="confirmBeforeNavigate()">Cancel</button></a
+          >
         </div>
       </div>
       <div class="form-column">

@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { FilterPipe } from "../app/Pipes/filter.pipe";
 import { AuthService } from "./auth.service";
 import { InfoComponent } from "./info/info.component";
+import { UnsavedArticle } from "./guards/UnsavedArticle.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { InfoComponent } from "./info/info.component";
     InfoComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [NewsService, AuthService],
+  providers: [NewsService, AuthService, UnsavedArticle],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
