@@ -18,7 +18,10 @@ export class NewsService {
   constructor(private http: HttpClient) {}
 
   getChannels(): Observable<any> {
-    return this.http.get("https://newsapi.org/v1/sources");
+    return this.http.get("https://newsapi.org/v1/sources", {
+      observe: "body",
+      responseType: "json"
+    });
   }
 
   getAuthorsList(): any {

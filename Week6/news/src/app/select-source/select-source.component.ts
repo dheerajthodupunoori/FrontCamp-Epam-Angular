@@ -16,10 +16,9 @@ export class SelectSourceComponent implements OnInit {
 
   //Called when component is initialized(only once).
   async ngOnInit() {
-    await this._newsService
-      .getChannels()
-      .subscribe(data => (this.channels = data.sources));
-
+    await this._newsService.getChannels().subscribe(data => {
+      this.channels = data.sources;
+    });
     this.articles = await this._newsService.articles;
     this.sendArticlesToNewsfeedComponent.emit(this.articles);
   }
