@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { newsApiEndPoint } from "./Config/Endpoint";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable, BehaviorSubject } from "rxjs";
 
 @Injectable({
@@ -15,7 +15,9 @@ export class NewsService {
     data => (this.articles = data)
   );
   public articles = this.listofArticles;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // this.getAuthors().subscribe(data => console.log(data));
+  }
 
   getChannels(): Observable<any> {
     return this.http.get("https://newsapi.org/v1/sources", {
@@ -32,6 +34,17 @@ export class NewsService {
       .then(response => response.json())
       .then(json => json.articles)
       .catch(error => JSON.stringify(error));
+  }
+
+  getAuthors(): any {
+    this.currentSourceName.subscribe(data => (this.source = data));
+    let articleParams = new HttpParams()
+      .set("source", "bbc-news")
+      .append("apikey", newsApiEndPoint.key);
+    return this.http.get("https://newsapi.org/v1/articles", {
+      params: articleParams,
+      observe: "response"
+    });
   }
 
   updateSourceName(selectedSourceName) {
