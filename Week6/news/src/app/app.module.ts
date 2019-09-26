@@ -8,7 +8,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { SourceComponent } from "./source/source.component";
 import { SelectSourceComponent } from "./select-source/select-source.component";
 import { FilterComponent } from "./filter/filter.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NewsService } from "./news.service";
 import { NewsFeedComponent } from "./news-feed/news-feed.component";
 import { CreateArticleComponent } from "./create-article/create-article.component";
@@ -17,6 +17,7 @@ import { FilterPipe } from "../app/Pipes/filter.pipe";
 import { AuthService } from "./auth.service";
 import { InfoComponent } from "./info/info.component";
 import { UnsavedArticle } from "./guards/UnsavedArticle.service";
+import { ModifyRequestInterceptor } from "./interceptors/modify-request.interceptor";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,16 @@ import { UnsavedArticle } from "./guards/UnsavedArticle.service";
     InfoComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [NewsService, AuthService, UnsavedArticle],
+  providers: [
+    NewsService,
+    AuthService,
+    UnsavedArticle,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ModifyRequestInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
