@@ -6,6 +6,8 @@ import { SourceComponent } from "./source/source.component";
 import { InfoComponent } from "./info/info.component";
 import { AuthGuardService as AuthGuard } from "./auth-guard.service";
 import { UnsavedArticle } from "./guards/UnsavedArticle.service";
+import { AdminComponent } from "./admin/admin.component";
+import { Role } from "./models/role";
 
 const routes: Routes = [
   { path: "", component: InfoComponent },
@@ -14,6 +16,12 @@ const routes: Routes = [
     component: CreateArticleComponent,
     canActivate: [AuthGuard],
     canDeactivate: [UnsavedArticle]
+  },
+  {
+    path: "admin",
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
   },
   {
     path: "newsFeed",

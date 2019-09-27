@@ -11,7 +11,7 @@ export class ModifyRequestInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log("Intercepted request is ", request);
+    // console.log("Intercepted request is ", request);
     return next.handle(request);
   }
 }

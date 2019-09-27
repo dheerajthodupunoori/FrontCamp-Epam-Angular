@@ -36,6 +36,7 @@ export class AuthComponent implements OnInit {
       this.displayLogInForm = !this.displayLogInForm;
       this.isLoggedIn = Boolean(localStorage.getItem("isLoggedIn"));
       this.loggedInUser = localStorage.getItem("userName");
+      console.log(this.user);
       this.route.navigate(["/newsFeed"]);
     } else {
       this.errorMessage =

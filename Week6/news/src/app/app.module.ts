@@ -18,6 +18,8 @@ import { AuthService } from "./auth.service";
 import { InfoComponent } from "./info/info.component";
 import { UnsavedArticle } from "./guards/UnsavedArticle.service";
 import { ModifyRequestInterceptor } from "./interceptors/modify-request.interceptor";
+import { AdminComponent } from "./admin/admin.component";
+import { UserService } from "./services/user.service";
 
 @NgModule({
   declarations: [
@@ -31,13 +33,15 @@ import { ModifyRequestInterceptor } from "./interceptors/modify-request.intercep
     CreateArticleComponent,
     PageNotFoundComponent,
     FilterPipe,
-    InfoComponent
+    InfoComponent,
+    AdminComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
     NewsService,
     AuthService,
     UnsavedArticle,
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ModifyRequestInterceptor,
