@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate {
         this.route.snapshot.firstChild.data.roles ===
         localStorage.getItem("role")
       ) {
-        this.router.navigate(["/admin"]);
+        this.router.navigate([""]);
       }
       return true;
     }

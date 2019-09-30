@@ -8,7 +8,7 @@
     LogIn
   </button>
   <ng-template #logout>
-    <h3>{{ loggedInUser }}</h3>
+    <h3>{{ loggedInUser.UserName }}</h3>
     <button class="login" (click)="logOut()">LogOut</button>
   </ng-template>
 </div>
