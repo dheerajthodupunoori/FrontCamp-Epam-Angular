@@ -7,7 +7,6 @@ import { InfoComponent } from "./info/info.component";
 import { AuthGuardService as AuthGuard } from "./auth-guard.service";
 import { UnsavedArticle } from "./guards/UnsavedArticle.service";
 import { AdminComponent } from "./admin/admin.component";
-import { Role } from "./models/role";
 
 const routes: Routes = [
   { path: "", component: InfoComponent },
@@ -20,8 +19,7 @@ const routes: Routes = [
   {
     path: "admin",
     component: AdminComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    canActivate: [AuthGuard]
   },
   {
     path: "newsFeed",
