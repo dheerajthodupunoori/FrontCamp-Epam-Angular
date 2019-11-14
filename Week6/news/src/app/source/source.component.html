@@ -6,7 +6,7 @@
       (sendArticlesToNewsfeedComponent)="articles = $event"
     ></app-select-source>
     <app-filter (sendSearchStringToParent)="searchString = $event"></app-filter>
-    <a routerLink="/addArticle/{{ sourceName }}"
+    <a routerLink="/addArticle/{{ sourceName }}" *ngIf="showCreateArticle()"
       ><button class="add-article">Add Article</button></a
     >
   </div>

@@ -15,9 +15,7 @@ export class NewsService {
     data => (this.articles = data)
   );
   public articles = this.listofArticles;
-  constructor(private http: HttpClient) {
-    // this.getAuthors().subscribe(data => console.log(data));
-  }
+  constructor(private http: HttpClient) {}
 
   getChannels(): Observable<any> {
     return this.http.get("https://newsapi.org/v1/sources", {
