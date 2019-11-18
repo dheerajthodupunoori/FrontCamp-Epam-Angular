@@ -11,7 +11,7 @@ import {
 } from "@angular/common/http";
 import { of } from "rxjs";
 
-fdescribe("NewsService", () => {
+describe("NewsService", () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
