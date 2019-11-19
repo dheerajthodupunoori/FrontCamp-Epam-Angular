@@ -4,7 +4,7 @@ import { AuthComponent } from "./auth.component";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "../auth.service";
 
-fdescribe("AuthComponent", () => {
+describe("AuthComponent", () => {
   const { _routerSpy, _activatedRouteSpy } = setup();
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ fdescribe("AuthComponent", () => {
         { provide: ActivatedRoute, useValue: _activatedRouteSpy },
         AuthService
       ]
-    });
+    }).compileComponents();
   });
 
   it("Component should be created", () => {
