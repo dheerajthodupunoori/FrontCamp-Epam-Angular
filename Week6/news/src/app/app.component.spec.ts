@@ -6,7 +6,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
-fdescribe("AppComponent", () => {
+describe("AppComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientModule, FormsModule],
@@ -25,11 +25,4 @@ fdescribe("AppComponent", () => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual("news");
   });
-
-  it("should have the other component", async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.componentInstance;
-    expect(compiled.querySelector("app-auth")).not.toBe(null);
-  }));
 });
